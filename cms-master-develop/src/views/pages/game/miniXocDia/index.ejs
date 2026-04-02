@@ -1,0 +1,518 @@
+<%- include('../../../includes/header') %>
+
+    <style>
+        html {
+            scroll-behavior: smooth
+        }
+
+        .iframe-player {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .iframe-player-container {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid;
+            border-radius: 0;
+        }
+
+        .mr-5 {
+            margin-left: 5px;
+        }
+
+        .ml-5 {
+            margin-right: 5px;
+        }
+        #dice-set-hover {
+            transition: transform .2s;
+            cursor: pointer;
+        }
+
+        #dice-set-hover:hover {
+            transform: scale(1.2)
+        }
+
+        .dice-result {
+            transition: transform .2s;
+        }
+
+        .dice-result:focus {
+            transform: scale(1.2)
+        }
+    </style>
+
+
+    <div class="container-fluid">
+        <!-- -------------------------------------------------------------- -->
+        <!-- Start Page Content -->
+        <!-- -------------------------------------------------------------- -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                            <h4 class="card-title">Thông tin phiên hiện tại</h4>
+                            <div class="card-actions ms-auto d-flex button-group">
+                              <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                              </a>
+                            </div>
+                        </div>
+                        <ul style="text-align: center; margin-top: 15px;display: none;" id="select-dice-set">
+                            <img onclick="taixiuSetDiceClick(0)" class="rounded" width="60" height="60"
+                                id="dice-set-hover" src="/assets/images/xocxoc/dice-0.png" alt="">
+                            <img onclick="taixiuSetDiceClick(1)" class="rounded" width="60" height="60"
+                                id="dice-set-hover" src="/assets/images/xocxoc/dice-1.png" alt="">
+                        </ul>
+
+                        <ul style="text-align: center; margin-top: 15px;">
+                            <li class="d-inline-block dice-result">
+                                <img onclick="taixiuSetDicePopup(1)" class="rounded" width="60" height="60" id="dice1"
+                                    src="/assets/images/miniGame/default.png" alt="">
+                            </li>
+                            <li class="d-inline-block dice-result">
+                                <img onclick="taixiuSetDicePopup(2)" class="rounded" width="60" height="60" id="dice2"
+                                    src="/assets/images/miniGame/default.png">
+                            </li>
+                            <li class="d-inline-block dice-result">
+                                <img onclick="taixiuSetDicePopup(3)" class="rounded" width="60" height="60" id="dice3"
+                                    src="/assets/images/miniGame/default.png" alt="">
+                            </li>
+                            <li class="d-inline-block dice-result">
+                                <img onclick="taixiuSetDicePopup(4)" class="rounded" width="60" height="60" id="dice4"
+                                    src="/assets/images/miniGame/default.png" alt="">
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-3 text-center">
+                                <code>Mã phiên, trạng thái trò chơi, thời gian còn lại, v.v..!</code>
+                            </h6>
+                            <div class="col-12">
+                                <ul
+                                    class="list-group list-group-horizontal-lg align-items-center justify-content-center">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fa-solid fa-fingerprint fa-fw"></i>
+                                        <span class="mr-5">Phiên: <b id="txt-round-id">#####</b></span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fa-solid fa-temperature-three-quarters fa-fw"></i>
+                                        <span class="mr-5"><b id="txt-status">.....</b></span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fa-solid fa-square-poll-vertical fa-fw"></i>
+                                        <span class="mr-5"><b id="txt-result">.....</b></span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fa-solid fa-clock fa-fw"></i>
+                                        <span class="mr-5"><b id="txt-time-remain">...</b></span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fa-solid fa-user fa-fw"></i>
+                                        <span class="mr-5">Cược: <b id="txt-total-user-bet">...</b></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <div class="col-12" style="text-align: center;margin-top: 10px;">
+                                <div class="ms-auto flex-shrink-0" id="dotline-last-result">
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-12" style="text-align: center;margin-top: 10px;">
+                                <div class="ms-auto flex-shrink-0" id="dotline-last-result">
+                                    <i style="color: #ff0000;text-decoration: none"
+                                        class="fa-solid fa-circle fa-xl  fa-fw" data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="#2045 | Chẵn" aria-label="#2045 | Chẵn"></i>
+                                    <i style="color: #9a9a9a;text-decoration: none"
+                                        class="fa-solid fa-circle fa-xl  fa-fw" data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="#2046 | Lẻ" aria-label="#2046 | Lẻ"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="card-body">
+                            <div class="align-items-center justify-content-center" align="center">
+                                <label class="btn btn-light-info text-info font-weight-medium">
+                                    <div class="mr-sm-2">
+                                        <input onclick="onPostSetResultValue($(this).attr('data-value'))"
+                                            data-value="white3" name="config-result-player_double"
+                                            type="checkbox" class="material-inputs" id="checkbox1">
+                                        <label class="form-check-label" for="checkbox1"><span
+                                                class="d-block d-md-none">2</span><span class="d-none d-md-block">3
+                                                Trắng</span></label>
+                                    </div>
+                                </label>
+                                <label class="btn btn-light-info text-info font-weight-medium">
+                                    <div class="mr-sm-2">
+                                        <input onclick="onPostSetResultValue($(this).attr('data-value'))"
+                                            data-value="even" name="config-result-draw" type="checkbox"
+                                            class="material-inputs" id="checkbox2">
+                                        <label class="form-check-label" for="checkbox2"><span
+                                                class="d-block d-md-none">3</span><span class="d-none d-md-block">Chẵn
+                                                Sấp Đôi</span></label>
+                                    </div>
+                                </label>
+                                <label class="btn btn-light-info text-info font-weight-medium">
+                                    <div class="mr-sm-2">
+                                        <input onclick="onPostSetResultValue($(this).attr('data-value'))"
+                                            data-value="red3" name="config-result-banker_double"
+                                            type="checkbox" class="material-inputs" id="checkbox5">
+                                        <label class="form-check-label" for="checkbox5"><span
+                                                class="d-block d-md-none">3</span><span class="d-none d-md-block">3
+                                                Đỏ</span></label>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">Đặt cược trực tiếp đang diễn ra</h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                          <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                            <i class="ri-fullscreen-line fs-6"></i>
+                          </a>
+                        </div>
+                    </div>
+                    <div class="card-body row">
+
+                        <div class="col">
+                            <div class="card" id="node-result-white4">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>4 Trắng 1:15</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-player"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-white4"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" id="node-result-white3">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>3 Trắng 1:3.8</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-player_double"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-white3"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" id="node-result-even">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>Chẵn 1:9.6</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-draw"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-even"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" id="node-result-odd">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>Lẻ 1:9.6</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-super"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-odd"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" id="node-result-red4">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>4 Đỏ 1:15</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-banker"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-red4"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card" id="node-result-red3">
+                                <div
+                                    class="d-flex border-bottom title-part-padding align-items-center justify-content-center">
+                                    <h4 class="card-title mb-0">
+                                        <b>3 Đỏ 1:3.8</b>
+                                    </h4>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <!-- <ul class="list-group" id="node-betdoor-banker_double"></ul> -->
+                                    <ul class="list-group" id="node-betdoor-red3"
+                                        style=" height: 400px;overflow: scroll;overflow-x: hidden;">
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <i class="fa-solid fa-coins fa-fw"></i> <span class="mr-5"
+                                                style="font-weight: 600;">TỔNG</span>
+                                            <span
+                                                class="badge bg-light-info text-info font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                        </li>
+                                        <div>
+                                            <li class="list-group-item align-items-center">
+                                                <i class="fa-solid fa-user fa-fw"></i>
+                                                <span class="mr-5">BOT | demo02 | UID:38</span>
+                                                <span
+                                                    class="badge bg-light-warning text-danger font-weight-medium rounded-pill ms-auto">17:19:28</span>
+                                                <span
+                                                    class="badge bg-light-danger text-danger font-weight-medium rounded-pill ms-auto">1.380.000</span>
+                                            </li>
+                                        </div>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">Lịch Sử Trò Chơi</h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                          <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                            <i class="ri-fullscreen-line fs-6"></i>
+                          </a>
+                        </div>
+                    </div>
+                    <div class="card-body row">
+                        <h6 class="card-subtitle mb-3">
+                            <code>Nhập ID phiên để tìm kiếm, bỏ trống để xem tất cả!</code>
+                        </h6>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input type="number" id="txt-session-view" class="form-control"
+                                    placeholder="Nhập ID phiên để xem..." aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2">
+                                <button class="btn btn-light-secondary text-secondary font-weight-medium" type="button"
+                                    onclick="onGetHistorySession()">
+                                    Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="table-responsive">
+                                <table class="table customize-table table-bordered mb-0 v-middle">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-bottom border-top text-center">ID Phiên</th>
+                                            <th class="border-bottom border-top text-center">Kết Quả</th>
+                                            <th class="border-bottom border-top text-center">Tổng Cược</th>
+                                            <th class="border-bottom border-top text-center">Tổng Thắng</th>
+                                            <th class="border-bottom border-top text-center">Tổng Thua</th>
+                                            <th class="border-bottom border-top text-center">Thời Gian</th>
+                                            <th class="border-bottom border-top text-center">Hành Động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-history-session"></tbody>
+                                </table>
+                                <nav class="text-center">
+                                    <ul class="pagination mt-3 text-center align-items-center justify-content-center"
+                                        id="history-session-pagination"></ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="display: none;" id="history-bet-session-container">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">Lịch Sử Đặt Cược Phiên #<b id="txt-view-bet-session-id"></b></h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                          <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                            <i class="ri-fullscreen-line fs-6"></i>
+                          </a>
+                        </div>
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-12 mt-3">
+                            <div class="table-responsive">
+                                <table class="table customize-table table-bordered mb-0 v-middle">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-bottom border-top text-center">BetID</th>
+                                            <th class="border-bottom border-top">Người Cược</th>
+                                            <th class="border-bottom border-top text-center">4
+                                                Trắng</th>
+                                            <th class="border-bottom border-top text-center">3
+                                                Trắng</th>
+                                            <th class="border-bottom border-top text-center">4
+                                                Đỏ</th>
+                                            <th class="border-bottom border-top text-center">3
+                                                Đỏ</th>
+                                            <th class="text-center">Cược
+                                                Chẵn</th>
+                                            <th class="border-bottom border-top text-center">
+                                                Cược Lẻ
+                                            </th>
+                                            <th class="border-bottom border-top text-center">Tổng Thắng</th>
+                                            <th class="border-bottom border-top text-center">Tổng Thua</th>
+                                            <th class="border-bottom border-top text-center">Thời gian</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-history-bet-session"></tbody>
+                                </table>
+                                <nav class="text-center">
+                                    <ul class="pagination mt-3 text-center align-items-center justify-content-center"
+                                        id="history-bet-session-pagination"></ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- row -->
+        <!-- -------------------------------------------------------------- -->
+        <!-- End PAge Content -->
+        <!-- -------------------------------------------------------------- -->
+    </div>
+
+    <script src="/core/js/game/mini_xocdia/mini_xocdia.js"></script>
+    <script src="/core/js/game/mini_xocdia/websocket.js"></script>
+
+    <%- include('../../../includes/footer') %>

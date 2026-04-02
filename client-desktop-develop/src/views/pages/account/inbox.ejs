@@ -1,0 +1,283 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/d-MemberCenter.329c67d5.css">
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/d-MemberCenterAnnouncement.221053f9.css">
+    <style>
+        .msg-card.lite.selected {
+            background-color: #fff;
+        }
+
+        .msg-card.selected {
+            position: relative;
+            padding: 10px;
+        }
+
+        .msg-card {
+            background-color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 1%;
+            margin-top: 5px;
+            transition: .2s ease;
+            width: 94%;
+        }
+    </style>
+
+    <div id="body-web-info">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">Thông báo - Sự kiện</div>
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" style="cursor: pointer;" onClick="showContent('message')">Hộp
+                                        Thư(<b id="count-msg">0</b>)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" style="cursor: pointer;"
+                                        onClick="showContent('annoucement')">Tin Nhắn Chung</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" style="margin-top: 24px;">
+
+
+                                <div class="nrc-tab-pane " id="tab-content-message" style="display: none;">
+                                    <div class="data normal">
+                                        <div class="actions">
+                                            <div></div>
+                                            <div><i class="d20_small_autorenew"></i></div>
+                                        </div>
+                                        <div id="list-message">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="nrc-tab-pane " id="tab-content-annoucement">
+                                    <div class="data normal">
+                                        <div class="actions">
+                                            <div></div>
+                                            <div><i class="d20_small_autorenew"></i></div>
+                                        </div>
+                                        <div id="list-annoucement">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="sub-content">
+                            <div class="title">Khuyến mãi</div>
+                            <div class="ads-block">
+                                <div class="promo-container">
+                                </div>
+                                <!-- SIDEBAR PROMOTION -->
+                                <%- include('./promotionSidebar') %>
+                                    <!-- SIDEBAR PROMOTION -->
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        const showContent = (target) => {
+            let arrTabElem = ['message', 'annoucement'];
+            arrTabElem.forEach((id) => {
+                let elementMenuProperti = $('#tab-menu-' + id);
+                let elementContentProperti = $('#tab-content-' + id);
+
+                if (target == id) {
+                    elementMenuProperti.addClass("active");
+                    elementContentProperti.fadeIn();
+                } else {
+                    elementMenuProperti.removeClass("active");
+                    elementContentProperti.hide();
+                }
+            });
+            if (target == 'message') getMessage();
+            if (target == 'annoucement') getAnnouncement();
+            //if (target == 'annoucement') getListUserBank();
+            // if (target == 'fund') null;
+        }
+
+        $(document).ready(() => {
+            showContent('message');
+            countNewMessage();
+        });
+
+        const getAnnouncement = () => {
+            const listAnnoucementElement = $('#list-annoucement');
+            listAnnoucementElement.html(``);
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/annoucement",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    listAnnoucementElement.fadeIn();
+                    const listAnnoucement = response.data;
+                    for (const item of listAnnoucement) {
+                        listAnnoucementElement.append(`
+                            <div class="msg-card lite selected" id="msg-element-${item.id}" onclick="viewDetail('${item.id}')" >
+                                <div class="data-block">
+                                    <div class="date">${moment(item.createdAt).format("HH:m DD/MM/YYYY")}</div>
+                                    <div class="title"
+                                        style="color: #454545; font-size: 13px; font-weight: 800; line-height: 1.2;">
+                                        ${item.title}
+                                    </div>  
+                                </div>
+                            </div>
+                        `);
+                    }
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+
+        const getMessage = () => {
+            const listAnnoucementElement = $('#list-message');
+            listAnnoucementElement.html(``);
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/message",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    listAnnoucementElement.fadeIn();
+                    const listAnnoucement = response.data;
+                    for (const item of listAnnoucement) {
+                        listAnnoucementElement.append(`
+                            <div class="msg-card lite selected" id="msg-element-${item.id}" onclick="viewDetailMsg('${item.id}')" ${(!item.seen) ? `style="background-color: #dae3ff;"` : ``} >
+                                <div class="data-block">
+                                    <div class="date">${moment(item.createdAt).format("HH:m DD/MM/YYYY")}</div>
+                                    <div class="title"
+                                        style="color: #454545; font-size: 13px; font-weight: 800; line-height: 1.2;">
+                                        ${item.title}
+                                    </div>  
+                                </div>
+                            </div>
+                        `);
+                    }
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+
+
+        const viewDetail = (id) => {
+            $('#msg-detail-time').html(``);
+            $('#msg-detail-title').html(``);
+            $('#msg-detail-content').html(``);
+
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/annoucement/annoucement-info/" + id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    console.log(response);
+                    $('#msg-detail-time').html(moment(response.data.createdAt).format("HH:m DD/MM/YYYY"));
+                    $('#msg-detail-title').html(response.data.title);
+                    $('#msg-detail-content').html(response.data.content);
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const viewDetailMsg = (id) => {
+            updateSeenMsg(id);
+            setTimeout(() => countNewMessage(), 1000);
+
+            $('#msg-detail-time').html(``);
+            $('#msg-detail-title').html(``);
+            $('#msg-detail-content').html(``);
+
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/message/message-info/" + id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    console.log(response);
+                    $('#msg-detail-time').html(moment(response.data.createdAt).format("HH:m DD/MM/YYYY"));
+                    $('#msg-detail-title').html(response.data.title);
+                    $('#msg-detail-content').html(response.data.content);
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const updateSeenMsg = (id) => {
+            $('#msg-element-' + id).css("background-color", "#fff");
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/message/seen/" + id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => { });
+        }
+
+        const countNewMessage = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/message/count-new",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    $('#count-msg').html(response.count);
+                    $('#count-msg-header').html(response.count);
+                }
+            });
+        }
+
+    </script>
+
+
+
+    <%- include('../../includes/footer') %>

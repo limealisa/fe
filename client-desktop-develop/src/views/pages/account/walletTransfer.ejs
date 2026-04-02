@@ -1,0 +1,360 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/3283.6bbf191b.css">
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/d-Deposit.b0c7d9b1.css">
+
+    <div id="body-web-info">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">Thông báo - Sự kiện</div>
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" style="cursor: pointer;"
+                                        onClick="showContent('transfer-deposit')">Nạp vào trò chơi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" style="cursor: pointer;"
+                                        onClick="showContent('transfer-withdraw')">Rút ra quỹ chính
+                                        tử</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" style="margin-top: 24px;">
+
+                                <div class="nrc-tab-pane " id="tab-content-transfer-deposit">
+                                    <div class="block" id="body-request-manual-bank">
+                                        <div>
+                                            <p>Vui lòng kiểm tra số dư trò chơi tại phần <b
+                                                    style="font-weight: bold;">Tài khoản</b> > <b
+                                                    style="font-weight: bold;">Ví tiền
+                                                    của tôi</b> </p>
+                                        </div>
+                                        <div class="mc-deposit">
+                                            <div class="mc-form-item">
+                                                <div class="mc-input-field">
+                                                    <label class="mc-input-field-block mc-not-empty required"
+                                                        for="remarks" style="height: 67px;">
+                                                        <div class="mc-input-field-label">Chọn trò chơi cần nạp vào
+                                                            vào</div>
+                                                        <div class="mc-input-base">
+                                                            <select class="mc-input-field-value"
+                                                                id="select-game-deposit"
+                                                                style="background: transparent;border: none;color: #454545;flex: 1 100%;font-size: 14px;height: 100%;padding: 0;">
+                                                                <option value=""> Chọn trò chơi nạp vào</option>
+                                                            </select>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mc-form-item">
+                                                <div class="mc-input-field">
+                                                    <label class="mc-input-field-block mc-not-empty required"
+                                                        for="depositamt">
+                                                        <div class="mc-input-field-label">Nhập số tiền nạp vào</div>
+                                                        <div class="mc-input-base">
+                                                            <input type="number" name="amountDeposit"
+                                                                placeholder="0 - Không giới hạn"
+                                                                class="mc-input-field-value" id="amountDeposit" value=""
+                                                                onchange="onChangerCoinDeposit()">
+                                                            <div class="mc-input-field-suffix" style="font-size: 12px;">
+                                                                VND(k)</div>
+                                                        </div>
+                                                        <div class="mc-input-amount-field">
+                                                            <div class="mc-input-convert-amount"
+                                                                id="changer-coint-deposit">= 0 Điểm</div>
+                                                            <div class="mc-input-convert-rule">Đơn vị tính là 1000:1
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="mc-reminder">Lưu ý: Kiểm tra kỹ tỷ lệ chuyển đổi trước khi
+                                                nạp</div>
+                                            <div class="mc-btn-wrapper">
+                                                <button title="" class="nrc-button" onclick="confirmWalletDeposit()"
+                                                    type="button">Xác nhận</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="nrc-tab-pane " id="tab-content-transfer-withdraw" style="display: none;">
+                                    <div class="block" id="body-request-manual-bank">
+                                        <div>
+                                            <p>Vui lòng kiểm tra số dư trò chơi tại phần <b
+                                                    style="font-weight: bold;">Tài khoản</b> > <b
+                                                    style="font-weight: bold;">Ví tiền
+                                                    của tôi</b> </p>
+                                        </div>
+                                        <div class="mc-deposit">
+                                            <div class="mc-form-item">
+                                                <div class="mc-input-field">
+                                                    <label class="mc-input-field-block mc-not-empty required"
+                                                        for="remarks" style="height: 67px;">
+                                                        <div class="mc-input-field-label">Chọn trò chơi cần rút ra
+                                                        </div>
+                                                        <div class="mc-input-base">
+                                                            <select class="mc-input-field-value"
+                                                                id="select-game-withdraw"
+                                                                style="background: transparent;border: none;color: #454545;flex: 1 100%;font-size: 14px;height: 100%;padding: 0;">
+                                                                <option value=""> Chọn trò chơi cần rút ra
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mc-form-item">
+                                                <div class="mc-input-field">
+                                                    <label class="mc-input-field-block mc-not-empty required"
+                                                        for="depositamt">
+                                                        <div class="mc-input-field-label">Nhập số điểm rút ra</div>
+                                                        <div class="mc-input-base">
+                                                            <input type="number" name="amountDeposit"
+                                                                placeholder="0 - Không giới hạn"
+                                                                class="mc-input-field-value" id="amountWithdraw"
+                                                                value="" onchange="onChangerCoinWithdraw()">
+                                                            <div class="mc-input-field-suffix" style="font-size: 12px;">
+                                                                Điểm trò chơi</div>
+                                                        </div>
+                                                        <div class="mc-input-amount-field">
+                                                            <div class="mc-input-convert-amount"
+                                                                id="changer-coint-withdraw">= 0 VND</div>
+                                                            <div class="mc-input-convert-rule">Đơn vị tính là 1:1000
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="mc-reminder">Lưu ý: Kiểm tra kỹ tỷ lệ chuyển đổi trước khi
+                                                rút</div>
+                                            <div class="mc-btn-wrapper">
+                                                <button title="" class="nrc-button" onclick="confirmWalletWithdraw()"
+                                                    type="button">Xác
+                                                    nhận</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="sub-content">
+                            <div class="title">Khuyến mãi</div>
+                            <div class="ads-block">
+                                <div class="promo-container">
+                                </div>
+                                <!-- SIDEBAR PROMOTION -->
+                                <%- include('./promotionSidebar') %>
+                                    <!-- SIDEBAR PROMOTION -->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(() => {
+            getListGame();
+        });
+
+        const showContent = (target) => {
+            let arrTabElem = ['transfer-deposit', 'transfer-withdraw'];
+            arrTabElem.forEach((id) => {
+                let elementMenuProperti = $('#tab-menu-' + id);
+                let elementContentProperti = $('#tab-content-' + id);
+
+                if (target == id) {
+                    elementMenuProperti.addClass("active");
+                    elementContentProperti.fadeIn();
+                } else {
+                    elementMenuProperti.removeClass("active");
+                    elementContentProperti.hide();
+                }
+            });
+            // if (target == 'deposit-manual') {
+            //     $('#deposit-list-show').fadeOut();
+            //     $('#selectDepositType').fadeIn();
+            // };
+            //if (target == 'deposit-auto') null;
+        }
+
+        const getListGame = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/game/gameAvalible",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    const ListGame = response.data;
+                    for (const item in ListGame) {
+                        $('#select-game-deposit').append(`
+                            <option value="${ListGame[item].type}">${ListGame[item].name}</option>
+                        `);
+                        $('#select-game-withdraw').append(`
+                            <option value="${ListGame[item].type}">${ListGame[item].name}</option>
+                        `);
+                    }
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const onChangerCoinDeposit = () => {
+            const inputCoin = $('#amountDeposit');
+            const elementShowChanged = $('#changer-coint-deposit');
+
+            if (Number(inputCoin.val()) >= 1000) {
+                const xcoin = Number(inputCoin.val()) / 1000;
+                elementShowChanged.html(`= ${xcoin} Điểm`);
+                inputCoin.val(Number(inputCoin.val()));
+            } else {
+                toastr.error(
+                    "Số tiền nạp phải tối thiểu là 1000 VND",
+                    "Thất bại!"
+                );
+                inputCoin.val("");
+                elementShowChanged.html(`= 0 Điểm`);
+            }
+        }
+
+        const onChangerCoinWithdraw = () => {
+            const inputCoin = $('#amountWithdraw');
+            const elementShowChanged = $('#changer-coint-withdraw');
+
+            if (Number(inputCoin.val()) > 0) {
+                const xcoin = Number(inputCoin.val()) * 1000;
+                elementShowChanged.html(`= ${numberWithCommas(xcoin)} VND`);
+                inputCoin.val(Number(inputCoin.val()));
+            } else {
+                toastr.error(
+                    'Số điểm rút tối thiểu là 1',
+                    "Thất bại!"
+                );
+                inputCoin.val("");
+                elementShowChanged.html(`= 0 VND`);
+            }
+        }
+
+        const confirmWalletDeposit = () => {
+            try {
+                const amount = $('#amountDeposit').val();
+                const type = $('#select-game-deposit').val();
+                if (!amount ||
+                    !type
+                ) {
+                    return toastr.error(
+                        'Vui lòng nhập đầy đủ thông tin trước khi nhấn xác nhận!',
+                        "Thất bại!"
+                    );
+                }
+
+                $.ajax({
+                    "url": "<%=dataPage.config.MAIN_API%>/api/game/wallet-transfer",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        "Content-Type": "application/json",
+                    },
+                    "data": JSON.stringify({
+                        amount: Number(amount),
+                        type: Number(type),
+                        transferType: 1
+                    }),
+                }).done(function (response) {
+                    if (response.status) {
+                        // alert(response.msg);
+                        toastr.success(
+                            response.msg,
+                            "Thành công!"
+                        );
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        // alert(response.msg);
+                        return toastr.error(
+                            response.msg,
+                            "Thất bại!"
+                        );
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+                alert(`Đã có lỗi xảy ra! vui lòng thử lại!`);
+            }
+        }
+
+        const confirmWalletWithdraw = () => {
+            try {
+                const amount = $('#amountWithdraw').val();
+                const type = $('#select-game-withdraw').val();
+
+                if (!amount ||
+                    !type
+                ) {
+                    toastr.error(
+                        "Vui lòng nhập đầy đủ thông tin trước khi nhấn xác nhận!",
+                        "Thất bại!"
+                    );
+                    return;
+                }
+
+                $.ajax({
+                    "url": "<%=dataPage.config.MAIN_API%>/api/game/wallet-transfer",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        "Content-Type": "application/json",
+                    },
+                    "data": JSON.stringify({
+                        amount: Number(amount),
+                        type: Number(type),
+                        transferType: 2
+                    }),
+                }).done(function (response) {
+                    if (response.status) {
+                        // alert(response.msg);
+                        toastr.success(
+                            response.msg,
+                            "Thành công!"
+                        );
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        return toastr.error(
+                            response.msg,
+                            "Thất bại!"
+                        );
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+                alert(`Đã có lỗi xảy ra! vui lòng thử lại!`);
+            }
+        }
+
+    </script>
+
+
+    <%- include('../../includes/footer') %>

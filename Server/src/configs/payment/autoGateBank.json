@@ -1,0 +1,6 @@
+{
+    "entryPoint": "https://bankjhgate.fastrgnsr.pro",
+    "partnerCode": "c133321",
+    "partnerKey": "35753",
+    "callbackUrl": "https://api.7894674.com/api/payment/fastpay/callback"
+}

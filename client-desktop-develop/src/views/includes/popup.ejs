@@ -1,0 +1,114 @@
+<div class="popup-login active">
+    <div class="login-container">
+        <div class="head">
+            <h2>Đăng nhập</h2>
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="body">
+            <form id="customform" class="customform" method="POST" action="/auth/login">
+                <input type="hidden" name="_token" value="c6ynQn1sByujsWmQ7MSpKg3oAbm0Aa9tyPM9TWxd">
+                <dl>
+                    <dd><input type="text" id="customform_UserName" name="username" placeholder="Tên Đăng Nhập"
+                            required="">
+                        <small class="username-msg-invalid" style="opacity: 0;">Vui lòng nhập tài khoản người
+                            chơi</small>
+                    </dd>
+                </dl>
+                <dl>
+                    <dd><input type="password" id="customform_Password" name="password" placeholder="Mật Khẩu"
+                            required="">
+                        <span><i class="fa-regular fa-eye"></i></span>
+                        <span><i class="fa-solid fa-eye-slash active"></i></span>
+                        <small class="pass-msg-invalid" style="opacity: 0;">Vui lòng nhập mật khẩu</small>
+                    </dd>
+                </dl>
+                <dl>
+                    <dd>
+                        <input type="submit" value="Đăng nhập" id="customform_submit">
+                    </dd>
+                </dl>
+                <div id="customformmsg"></div>
+            </form>
+            <div class="text-center">
+                <div class="register-now">
+                    <p>Bạn chưa có tài khoản? <span><a href="/auth/register">Đăng ký ngay</a></span></p>
+                </div>
+                <div class="forget">
+                    <a target="_blank" href="https://tawk.to/chat/634bc086b0d6371309c9c59f/1gffug46h">Quên tên đăng
+                        nhập</a>
+                    <a target="_blank" href="https://tawk.to/chat/634bc086b0d6371309c9c59f/1gffug46h">Quên mật
+                        khẩu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup-forgetPass active">
+    <div class="forgetPass-container">
+        <div class="head">
+            <h2>Quên mật khẩu</h2>
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="body">
+            <div class="top-link">
+                <a href="https://tawk.to/chat/63ec973b47425128791369c3/1gpa2tgo6">
+                    <img src="/web/nato888/web/Images/forget-pass.png" alt="">
+                    <h2>Liên hệ CSKH</h2>
+                </a>
+            </div>
+            <div class="bot-content">
+                <i class="fa-solid fa-arrow-up"></i>
+                <h3>Liên hệ chăm sóc khách hàng nếu bạn quên mật khẩu</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup-forgetPass" style="display: none;background-color: rgb(0 0 0 / 13%);" id="popup-news">
+    <div class="forgetPass-container" style="border-radius: 12px;">
+        <div class="head">
+            <h2></h2>
+            <h2 id="popup-news-title"></h2>
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="body" id="popup-news-content">
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        getSiteInfo().then((data) => {
+            const announcement = data.announcement;
+            $("#popup-news-title").html(announcement.title);
+            $("#popup-news-content").html(announcement.content);
+            if (announcement.isShow) {
+                $('#popup-news').fadeIn();
+            }
+        });
+    });
+
+    const getSiteInfo = () => {
+        return new Promise((resolve, reject) => {
+            var settings = {
+                "url": "<%=dataPage.config.MAIN_API%>/api/config/info",
+                "method": "GET",
+                "timeout": 0,
+                "headers": { "Content-Type": "application/json" },
+            };
+            $.ajax(settings).done(function (response) {
+                if (response.status) {
+                    const data = response.data;
+                    resolve(data);
+                } else {
+                    reject(response);
+                }
+            }).fail(err => {
+                reject(err);
+            });
+        });
+    }
+</script>

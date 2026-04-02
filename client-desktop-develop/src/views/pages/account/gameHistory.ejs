@@ -1,0 +1,130 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/nato888/css/pagination.css">
+
+    <div id="body-web-bet-history">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">
+                                Lịch sử trò chơi
+                                <span
+                                    style="width: 80%; color: #6b6b6b; font-size: 12px; margin-left: 10px; font-weight: 500;">
+                                    *Truy cập dữ liệu có thể bị trì hoãn, nếu không thấy lịch sử trò chơi, vui lòng thử
+                                    lại sau Dữ liệu tổng quan được tổng hợp vào GMT + 8 cố định và chỉ hiển thị dữ liệu
+                                    của 10 ngày.</span>
+                            </div>
+
+                            <div class="tab-content" style="margin-top: 25px;">
+                                <div id="history0" class="tab-pane fade active show in">
+                                    <small>Kiểm tra lịch sử giao dịch 31 ngày gần
+                                        đây</small>
+                                    <div class="wrap-box" style="margin-top: 25px;">
+                                        <table class="bet0">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="font-family: revert;font-size: 13px;">Thời gian đặt cược
+                                                    </th>
+                                                    <th style="font-family: revert;font-size: 13px;">Thời gian cược</th>
+                                                    <th style="font-family: revert;font-size: 13px;">ID phiên</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Nhà cung cấp</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Trò chơi</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Tổng cược</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Cược Hợp Lệ</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Thắng/Thua</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Trạng thái</th>
+                                                </tr>
+                                                <% if(dataApi.dataExport.length > 0) { %>
+                                                    <% dataApi.dataExport.forEach((data)=>{ %>
+                                                    <% 
+                                                    let ssId = '';
+                                                    if(data.sessionId != null){
+                                                        const parseSsId = data.sessionId.split("-");
+                                                        ssId = parseSsId[parseSsId.length - 1];
+                                                    }else{
+                                                        ssId = '';
+                                                    }
+                                                        
+                                                    %>
+
+
+                                                            <tr>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.moment(data.betTime).format("YYYY-M-DD HH:m")%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.moment(data.transactionTime).format("YYYY-M-DD HH:m")%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=ssId%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=data.gameCode%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=data.gameName%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.numberWithCommas(data.betAmount)%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.numberWithCommas(data.validBetAmount)%></th>
+                                                                <%  if (data.winAmount > 0) { %>
+                                                                        <th style="font-family: serif;font-size: 15px;" class="text-success"><%=dataPage.helpers.numberWithCommas(data.netPnl)%></th>
+                                                                <%  }else { %>
+                                                                        <th style="font-family: serif;font-size: 15px;" class="text-danger"><%=dataPage.helpers.numberWithCommas(data.netPnl)%></th>
+                                                                 <%    } %>
+                                                                <th style="font-family: serif;font-size: 15px;">Đã xử lý</th>
+                                                            </tr>
+
+                                                            <% }); %>
+                                                                <% }else { %>
+                                                                    <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <% if(dataApi.dataExport.length <=0) { %>
+                                        <div class="text-center" style="min-height: 35px;padding: 17px;">
+                                            Không có dữ liệu
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+
+
+                                    <div class="text-center">
+                                        <div class="pagination-container">
+                                            <div class="nrc-pagination-wrapper">
+                                                <ul class="rc-pagination " unselectable="unselectable"
+                                                    id="phantrangUser">
+                                                    <li title="上一页" class="rc-pagination-disabled rc-pagination-prev"
+                                                        aria-disabled="true"><a></a></li>
+                                                    <li title="1"
+                                                        class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li title="下一页" class="rc-pagination-disabled rc-pagination-next"
+                                                        aria-disabled="true"><a></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const phantrang = Pagination('<%=dataApi.page%>', '<%=dataApi.total%>', '<%=dataApi.kmess%>');
+        let phantrangBody = '';
+        phantrang.forEach((page) => {
+            $("#phantrangUser").html(phantrangBody);
+            let active = ('<%=dataApi.page%>' == page) ? "rc-pagination-item-active" : "";
+            const urlToPage = (page !== "...") ? `/account/game-history?page=${page}&limit=<%=dataApi.kmess%>` : `javascript:void(0)`;
+            phantrangBody += `
+                <li class="rc-pagination-item rc-pagination-item-1 ${active}">
+                    <a href="${urlToPage}"><b>${page}</b></a>
+                </li>
+            `;
+            $("#phantrangUser").html(phantrangBody);
+        });
+    </script>
+
+
+    <%- include('../../includes/footer') %>

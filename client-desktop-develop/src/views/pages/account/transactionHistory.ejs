@@ -1,0 +1,169 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/nato888/css/pagination.css">
+    <style>
+        th span {
+            padding-right: 0;
+            word-wrap: break-word;
+            display: block;
+            overflow: hidden;
+            padding-right: 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .deposit-status {
+            border-radius: 100px;
+            height: 30px;
+            line-height: 30px;
+            min-width: 87px;
+            padding: 0 4px;
+            width: 80%;
+        }
+        .deposit-status.expired {
+            background-color: #e7e7e7;
+            border: 1px solid #e7e7e7;
+            color: #6b6b6b;
+        }
+        .deposit-status.canceled {
+            background-color: #e7e7e7;
+            border: 1px solid #ffba02;
+            color: #ffa200;
+        }
+        .deposit-status.done {
+            background-color: #e7e7e7;
+            border: 1px solid #32d788;
+            color: #32d788;
+        }
+
+    </style>
+
+    <div id="body-web-bet-history">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">
+                                Giao Dịch Nạp Rút
+                                <span
+                                    style="width: 80%; color: #6b6b6b; font-size: 12px; margin-left: 10px; font-weight: 500;">
+                                    *Truy cập dữ liệu có thể bị trì hoãn, nếu không thấy các đơn nạp rút chuyển trạng
+                                    thái sau 5 đến 10 phút, vui lòng liên hệ chăm sóc khách hàng để được hỗ trợ.</span>
+                            </div>
+
+                            <div class="tab-content" style="margin-top: 25px;">
+                                <div id="history0" class="tab-pane fade active show in">
+                                    <small>Kiểm tra lịch sử giao dịch nạp rút tại đây</small>
+                                    <div class="wrap-box" style="margin-top: 25px;">
+                                        <table class="bet0">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="font-family: revert;font-size: 13px;">Thời gian
+                                                    </th>
+                                                    <th style="font-family: revert;font-size: 13px;">#OrderID</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Phương thức</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Số tiền</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Trạng thái</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Thông tin thêm</th>
+                                                </tr>
+                                                <% if(dataApi.dataExport.length> 0) { %>
+                                                    <% dataApi.dataExport.forEach((data)=> { %>
+
+                                                        <tr>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                                <%=dataPage.helpers.moment(data.createdAt).format("DD/MM/YYYY HH:MM")%>
+                                                            </th>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                                #<%=data.id%>
+                                                            </th>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                                <%=(data.type=="recharge" ) ? "Nạp tiền" : "Rút tiền" %>
+                                                            </th>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                                <%=dataPage.helpers.numberWithCommas(data.amount)%> VND
+                                                            </th>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                                <div class="flex-center">
+                                                                    <% if (data.status=="pending" ) { %>
+                                                                        <span style="font-family: serif;font-size: 15px;" class="deposit-status expired">Đang xử
+                                                                            lý</span>
+                                                                        <% } else if (data.status=="error" ) { %>
+                                                                            <span style="font-family: serif;font-size: 15px;" class="deposit-status canceled">Thất
+                                                                                bại</span>
+                                                                            <% } else if (data.status=="success" ) { %>
+                                                                                <span style="font-family: serif;font-size: 15px;" class="deposit-status done">Thành
+                                                                                    công</span>
+                                                                                <% }%>
+                                                                </div>
+                                                            </th>
+                                                            <th style="font-family: serif;font-size: 15px;">
+                                                            <%=data.info%>
+                                                            </th>
+                                                        </tr>
+
+                                                        <% }); %>
+                                                            <% }else { %>
+                                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <% if(dataApi.dataExport.length <=0) { %>
+                                        <div class="text-center" style="min-height: 35px;padding: 17px;">
+                                            Không có dữ liệu
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+
+
+                            <div class="text-center">
+                                <div class="pagination-container">
+                                    <div class="nrc-pagination-wrapper">
+                                        <ul class="rc-pagination " unselectable="unselectable" id="phantrangUser">
+                                            <li title="上一页" class="rc-pagination-disabled rc-pagination-prev"
+                                                aria-disabled="true"><a></a></li>
+                                            <li title="1"
+                                                class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active">
+                                                <a>1</a>
+                                            </li>
+                                            <li title="下一页" class="rc-pagination-disabled rc-pagination-next"
+                                                aria-disabled="true"><a></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const phantrang = Pagination('<%=dataApi.page%>', '<%=dataApi.total%>', '<%=dataApi.kmess%>');
+
+        let phantrangBody = '';
+        phantrang.forEach((page) => {
+            $("#phantrangUser").html(phantrangBody);
+            let active = ('<%=dataApi.page%>' == page) ? "rc-pagination-item-active" : "";
+            const urlToPage = (page !== "...") ? `/account/finan-history?page=${page}&limit=<%=dataApi.kmess%>` : `javascript:void(0)`;
+            phantrangBody += `
+                <li class="rc-pagination-item rc-pagination-item-1 ${active}">
+                    <a href="${urlToPage}"><b>${page}</b></a>
+                </li>
+            `;
+            $("#phantrangUser").html(phantrangBody);
+        });
+    </script>
+
+    <%- include('../../includes/footer') %>

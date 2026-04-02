@@ -1,0 +1,885 @@
+<%- include('../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/assets/libs/c3/c3.min.css" />
+
+    <div class="container-fluid">
+        <div class="col-md-8 row" style="margin-bottom:10px;">
+            <div class="col-md-3 row" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <input type="text" name="inputDashboardFrom" class="form-control mydatepicker"
+                        placeholder="mm/dd/yyyy">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 row" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <input type="text" name="inputDashboardTo" class="form-control mydatepicker"
+                        placeholder="mm/dd/yyyy">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2 row">
+                <button onclick="getStatisSystem()" type="button" class="btn waves-effect waves-light btn-secondary"
+                    style="height: 33px; margin-top: 1px;">
+                    Kiểm tra
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-info">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h2 id="dashboard-total-deposit">0</h2>
+                                <h6 class="text-info mb-0">TỔNG NẠP</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-info display-6"><i class="fas fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-primary">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="dashboard-total-withdraw">0</h2>
+                                <h6 class="text-primary mb-0"> TỔNG RÚT</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-primary display-6"><i class="fas fa-tags"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-success">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="dashboard-total-profit">0</h2>
+                                <h6 class="text-success mb-0">TỔNG THẮNG THUA</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-success display-6">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-orange">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="dashboard-total-volume">0</h2>
+                                <h6 class="text-orange mb-0">TỔNG CƯỢC</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-orange display-6"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-pie-chart feather-xl">
+                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                                    </svg></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-success">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-success display-6">
+                                    <i class="fas fa-sitemap"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-new-deposit" style="text-align: right;">0</h2>
+                                <h6 class="text-success mb-0">TỔNG NGƯỜI NẠP MỚI</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-primary">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-primary display-6">
+                                    <i class="fas fa-sitemap"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-re-deposit" style="text-align: right;">0</h2>
+                                <h6 class="text-primary mb-0">TỔNG NGƯỜI NẠP LẠI</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="dashboard-total-incentive">0</h2>
+                                <h6 class="text-cyan mb-0">TỔNG KHUYẾN MÃI</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-cyan display-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-dollar-sign feather-xl">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-primary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex no-block align-items-center">
+                                    <div>
+                                        <h2 id="dashboard-total-betRefurn">0</h2>
+                                        <h6 class="text-warning mb-0">TỔNG HOÀN TRẢ</h6>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="text-primary display-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-dollar-sign feather-xl">
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="totalSumBalance">0</h2>
+                                <h6 class="text-cyan mb-0">TỔNG SỐ DƯ</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-cyan display-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-dollar-sign feather-xl">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-orange">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-orange display-6">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-user" style="text-align: right;">0</h2>
+                                <h6 class="text-orange mb-0">TỔNG THÀNG VIÊN ĐĂNG KÝ</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-info">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-info display-6">
+                                    <i class="fas fa-user-secret"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-user-agency" style="text-align: right;">0</h2>
+                                <h6 class="text-info mb-0">TỔNG ĐẠI LÝ</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-register-by-agenccy" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">TỔNG THÀNH VIÊN ĐĂNG KÝ QUA ĐẠI LÝ</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="margin-top: 15px;"></div>
+
+        <div class="row">
+            <div class="col-md-8 row" style="margin-bottom:10px;">
+                <div class="col-md-3 row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <input type="text" name="inputDashboardChartFrom" class="form-control mydatepicker"
+                            placeholder="mm/dd/yyyy">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <input type="text" name="inputDashboardChartTo" class="form-control mydatepicker"
+                            placeholder="mm/dd/yyyy">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-2 row">
+                    <button onclick="getStatisChart()" type="button" class="btn waves-effect waves-light btn-secondary"
+                        style="height: 33px; margin-top: 1px;">
+                        Kiểm tra
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">
+                            THỐNG KÊ NẠP RÚT
+                        </h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                            <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="finan-chart-container"></div>
+                            <!-- <canvas id="finan-chart-container" height="150"></canvas> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">
+                            THỐNG KÊ CƯỢC HỢP LỆ    
+                        </h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                            <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <canvas id="valid-bet-chart-container" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">
+                            THỐNG KÊ SỐ LƯỢNG ĐĂNG KÝ MỚI
+                        </h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                            <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="new-user-reg-chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">
+                            THỐNG KÊ SỐ LƯỢNG NẠP MỚI
+                        </h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                            <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="new-first-deposit-chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title">
+                            THỐNG KÊ SỐ LƯỢNG HOÀN TRẢ
+                        </h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                            <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                                <i class="ri-fullscreen-line fs-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="bet-refurn-chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Chart JS -->
+    <script src="/assets/libs/chart.js/dist/Chart.min.js"></script>
+
+    <!-- This Page Plugins -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.css" rel="stylesheet" />
+
+    <!-- Charts JS -->
+    <!-- <script src="/dist/js/pages/c3-chart/data/c3-category-data.js"></script>
+    <script src="/dist/js/pages/c3-chart/data/c3-column-oriented.js"></script>
+
+    <script src="/dist/js/pages/c3-chart/data/c3-data-from-url.js"></script>
+    <script src="/dist/js/pages/c3-chart/data/c3-data-order.js"></script>
+    <script src="/dist/js/pages/c3-chart/data/c3-row-oriented.js"></script> -->
+
+    <!-- <script src="/dist/js/pages/c3-chart/data/c3-data-color.js"></script> -->
+
+    <script>
+
+
+        $(document).ready(() => {
+            // Set default value
+            $('input[name="inputDashboardFrom"]').val(moment().format("DD/MM/YYYY"));
+            $('input[name="inputDashboardTo"]').val(moment().format("DD/MM/YYYY"));
+
+            // Date Picker  
+            $('input[name="inputDashboardFrom"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('input[name="inputDashboardTo"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            // call system statis
+            getStatisSystem();
+            // call system caculate
+            getCalculateSystem();
+            // call sum user and agency sum balance
+            getTotalSumBalance();
+
+            // Set default value
+            $('input[name="inputDashboardChartFrom"]').val(moment().subtract(7, 'days').format("DD/MM/YYYY"));
+            $('input[name="inputDashboardChartTo"]').val(moment().format("DD/MM/YYYY"));
+
+            // Date Picker  
+            $('input[name="inputDashboardChartFrom"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('input[name="inputDashboardChartTo"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            // call system statis
+            getStatisChart();
+        });
+        // getStatisChart
+
+        const getStatisChart = () => {
+            blockUI(true);
+            $.ajax({
+                "url": '<%=dataPage.config.API_SERVER%>/dashboard/chart-statis?from=' + $('input[name="inputDashboardChartFrom"]').val() + '&to=' + $('input[name="inputDashboardChartTo"]').val(),
+                "method": "GET",
+                "timeout": 0,
+                "headers": { "Authorization": "Bearer <%=dataPage.session.accessToken%>", },
+            }).then((response) => {
+                blockUI(false);
+                if (response.status) {
+                    initChartStatis(response.data.chart);
+                } else {
+                    toastr.error(
+                        response.msg,
+                        "Error!"
+                    );
+                }
+            });
+        }
+
+        const getStatisSystem = () => {
+            blockUI(true);
+            $.ajax({
+                "url": '<%=dataPage.config.API_SERVER%>/dashboard/statis?from=' + $('input[name="inputDashboardFrom"]').val() + '&to=' + $('input[name="inputDashboardTo"]').val(),
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                },
+            }).then((response) => {
+                blockUI(false);
+                let totalCommission = 0;
+                let percentMultiply = 0;
+
+                if (response.status) {
+                    $('#dashboard-total-deposit').html(numberWithCommas(response.data.totalDeposit));
+                    $('#dashboard-total-withdraw').html(numberWithCommas(response.data.totalWithdraw));
+                    $('#dashboard-total-profit').html(numberWithCommas(response.data.totalProfit));
+                    $('#dashboard-total-volume').html(numberWithCommas(response.data.totalVolumeBet));
+                    $('#dashboard-total-playProfit').html(numberWithCommas(response.data.totalPlayProfit));
+                    $('#dashboard-total-betRefurn').html(numberWithCommas(response.data.totalRefurn));
+                    $('#dashboard-total-new-deposit').html(numberWithCommas(response.data.totalNewDeposit));
+                    $('#dashboard-total-re-deposit').html(numberWithCommas(response.data.totalReDeposit));
+                    $('#dashboard-total-incentive').html(numberWithCommas(response.data.totalIncentive));
+                } else {
+                    toastr.error(
+                        response.msg,
+                        "Error!"
+                    );
+                }
+            });
+        }
+
+        const getCalculateSystem = () => {
+            $.ajax({
+                "url": '<%=dataPage.config.API_SERVER%>/dashboard/calculate',
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                },
+            }).then((response) => {
+                if (response.status) {
+                    $('#dashboard-total-user').html(numberWithCommas(response.data.totalSystemUser));
+                    $('#dashboard-total-user-agency').html(numberWithCommas(response.data.totalSystemUserIsAgency));
+                    $('#dashboard-total-register-by-agenccy').html(numberWithCommas(response.data.totalSystemUserRegisterByAgency));
+                    //$('#dashboard-total-subsystem').html(numberWithCommas(response.data.totalSystemUser));
+                } else {
+                    console.log(response);
+                    toastr.error(
+                        response.msg,
+                        "Error!"
+                    );
+                }
+            });
+        }
+
+        const getTotalSumBalance = () => {
+            $.ajax({
+                "url": '<%=dataPage.config.API_SERVER%>/dashboard/sum-balance',
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                },
+            }).then((response) => {
+                if (response.status) {
+                    $('#totalSumBalance').html(numberWithCommas(response.totalCoin));
+                } else {
+                    console.log(response);
+                    toastr.error(
+                        response.msg,
+                        "Error!"
+                    );
+                }
+            });
+        }
+
+        // get online 
+        // socketSend({ action: { dashboard: { getOnline: true } } });
+
+        const initChartStatis = (data) => {
+            createChartFinan({
+                deposit: data.deposit,
+                withdraw: data.withdraw,
+            });
+            createChartNewFirstDeposit(data.newFirstDeposit);
+            createChartBetRefurn(data.betRefurn);
+            createChartIncentive(data.incentive);
+            createChartValidBet(data.validBet);
+            createChartNewUserReg(data.newUserReg);
+        }
+
+
+
+
+        const createChartFinan = (data) => {
+            // var a = c3.generate({
+            //     bindto: "#data-color",
+            //     size: { height: 400 },
+            //     data: {
+            //         axis: {
+            //             x: {
+            //                 type: 'category',
+            //                 categories: ['cat1', 'cat2', 'ca3', 'ca3', 'ca3', 'ca3']
+            //             },
+            //         },
+            //         columns: [
+            //             ["data1", 130, 200, 150, 40, 360, 50],
+            //             ["data2", 100, 130, 100, 240, 130, 350],
+            //             ["data3", 300, 240, 360, 400, 250, 250],
+            //         ],
+            //         type: "bar",
+            //         colors: { data1: "#009efb", data2: "#7460ee" },
+            //         color: function (a, o) {
+            //             return o.id && "data3" === o.id ? d3.rgb(a).darker(o.value / 150) : a;
+            //         },
+            //     },
+            //     grid: { y: { show: !0 } },
+            // });
+
+            var chart = c3.generate({
+                bindto: '#finan-chart-container',
+                size: { height: 381 },
+                data: {
+                    columns: [
+                        ['Nạp vào'].concat(Object.values(data.deposit)),
+                        ['Rút ra'].concat(Object.values(data.withdraw)),
+                    ],
+                    type: 'bar',
+                    colors: { 'Nạp vào': "#5ac146", 'Rút ra': "#f51616" },
+                },
+                tooltip: {
+                    format: {
+                        // title: function (d) {
+                        //     return d; // Thay đổi nhãn tiêu đề của tooltip
+                        // },
+                        value: function (value, ratio, id) {
+                            return numberWithCommas(value); // Định dạng giá trị hiển thị
+                        }
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.5
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: Object.keys(data.deposit) || Object.keys(data.withdraw), // chứa giá trị giống nhau
+                        tick: {
+                            // rotate: 0, // Xoay nhãn 75 độ
+                            // count: 10, // Hiển thị tối đa 10 nhãn
+                            // format: function (d) {
+                            //     return d.substring(0, 5); // Chỉ hiển thị 5 ký tự đầu của nhãn
+                            // }
+                            count: function () {
+                                // console.log(this);
+                                // var categories = this.config.axis.x.categories;
+                                // return categories.length > 10 ? 10 : categories.length;
+                            }
+                        },
+                    },
+                    y: {
+                        // Định dạng nhãn
+                        tick: {
+                            format: function (value) {
+                                return numberWithCommas(value);
+                            }
+                        }
+                    }
+                }
+            });
+
+            // var categories = chart.config.axis.x.categories;
+
+        }
+
+        const createChartNewFirstDeposit = (data) => {
+            var chart = c3.generate({
+                bindto: '#new-first-deposit-chart-container',
+                size: { height: 381 },
+                data: {
+                    columns: [
+                        ['Số lượng nạp mới'].concat(Object.values(data)),
+                    ],
+                    colors: { 'Số lượng nạp mới': "#8fce00" },
+                },
+                tooltip: {
+                    format: {
+                        // title: function (d) {
+                        //     return d; // Thay đổi nhãn tiêu đề của tooltip
+                        // },
+                        value: function (value, ratio, id) {
+                            return numberWithCommas(value); // Định dạng giá trị hiển thị
+                        }
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: Object.keys(data), // chứa giá trị giống nhau
+                        tick: {
+                            // rotate: 0, // Xoay nhãn 75 độ
+                            // count: 10, // Hiển thị tối đa 10 nhãn
+                            // format: function (d) {
+                            //     return d.substring(0, 5); // Chỉ hiển thị 5 ký tự đầu của nhãn
+                            // }
+                            count: function () {
+                                // console.log(this);
+                                // var categories = this.config.axis.x.categories;
+                                // return categories.length > 10 ? 10 : categories.length;
+                            }
+                        },
+                    },
+                    y: {
+                        // Định dạng nhãn
+                        tick: {
+                            format: function (value) {
+                                return numberWithCommas(value);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        const createChartBetRefurn = (data) => {
+            var chart = c3.generate({
+                bindto: '#bet-refurn-chart-container',
+                size: { height: 381 },
+                data: {
+                    columns: [
+                        ['Hoàn trả'].concat(Object.values(data)),
+                    ],
+                    colors: { 'Hoàn trả': "#f51616" },
+                },
+                tooltip: {
+                    format: {
+                        // title: function (d) {
+                        //     return d; // Thay đổi nhãn tiêu đề của tooltip
+                        // },
+                        value: function (value, ratio, id) {
+                            return numberWithCommas(value); // Định dạng giá trị hiển thị
+                        }
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: Object.keys(data), // chứa giá trị giống nhau
+                        tick: {
+                            // rotate: 0, // Xoay nhãn 75 độ
+                            // count: 10, // Hiển thị tối đa 10 nhãn
+                            // format: function (d) {
+                            //     return d.substring(0, 5); // Chỉ hiển thị 5 ký tự đầu của nhãn
+                            // }
+                            count: function () {
+                                // console.log(this);
+                                // var categories = this.config.axis.x.categories;
+                                // return categories.length > 10 ? 10 : categories.length;
+                            }
+                        },
+                    },
+                    y: {
+                        // Định dạng nhãn
+                        tick: {
+                            format: function (value) {
+                                return numberWithCommas(value);
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+
+        const createChartIncentive = (data) => {
+
+        }
+
+        const createChartValidBet = (data) => {
+            new Chart(document.getElementById("valid-bet-chart-container"), {
+                type: "line",
+                data: {
+                    labels: Object.keys(data), // [4500, 3500, 3200, 3050, 2700, 2450, 2200, 1750, 1499, 2050],
+                    datasets: [
+                        {
+                            data: Object.values(data).map((value) => value.toFixed(2)), //[168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
+                            label: "Cược hợp lệ",
+                            borderColor: "#4bc0c0",
+                            fill: true,
+                            cubicInterpolationMode: 'monotone',
+                            tension: 0.4,
+                        }
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        intersect: false,
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#b2b9bf",
+                        },
+                    },
+                    title: {
+                        display: false,
+                        fontColor: "#b2b9bf",
+                        text: "World population per region (in millions)",
+                    },
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    fontColor: "#b2b9bf",
+                                    fontSize: 12,
+                                    callback: function (value, index, values) {
+                                        return numberWithCommas(value);
+                                    }
+                                },
+                            },
+                        ],
+                        xAxes: [
+                            {
+                                ticks: {
+                                    fontColor: "#b2b9bf",
+                                    fontSize: 12,
+                                    // callback: function (value, index, values) {
+                                    //     return `Label ${value}`;
+                                    // }
+                                },
+                            },
+                        ],
+                    }
+                },
+            });
+        }
+
+        const createChartNewUserReg = (data) => {
+            var chart = c3.generate({
+                bindto: '#new-user-reg-chart-container',
+                size: { height: 381 },
+                data: {
+                    columns: [
+                        ['Đăng ký mới'].concat(Object.values(data)),
+                    ],
+                    colors: { 'Đăng ký mới': "#2da5fe" },
+                },
+                tooltip: {
+                    format: {
+                        // title: function (d) {
+                        //     return d; // Thay đổi nhãn tiêu đề của tooltip
+                        // },
+                        value: function (value, ratio, id) {
+                            return numberWithCommas(value); // Định dạng giá trị hiển thị
+                        }
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: Object.keys(data), // chứa giá trị giống nhau
+                        tick: {
+                            // rotate: 0, // Xoay nhãn 75 độ
+                            // count: 10, // Hiển thị tối đa 10 nhãn
+                            // format: function (d) {
+                            //     return d.substring(0, 5); // Chỉ hiển thị 5 ký tự đầu của nhãn
+                            // }
+                            count: function () {
+                                // console.log(this);
+                                // var categories = this.config.axis.x.categories;
+                                // return categories.length > 10 ? 10 : categories.length;
+                            }
+                        },
+                    },
+                    y: {
+                        // Định dạng nhãn
+                        tick: {
+                            format: function (value) {
+                                return numberWithCommas(value);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+
+
+    <%- include('../includes/footer') %>

@@ -1,0 +1,140 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/nato888/css/pagination.css">
+
+    <div id="body-web-bet-history">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">
+                                Lịch sử hoàn trả cược
+                            </div>
+
+                            <div class="tab-content" style="margin-top: 25px;">
+                                <div id="history0" class="tab-pane fade active show in">
+                                    <!-- <small>Kiểm tra lịch sử giao dịch 31 ngày gần
+                                        đây</small> -->
+                                    <div class="wrap-box" style="margin-top: 25px;">
+                                        <table class="bet0">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="font-family: revert;font-size: 13px;">Thời gian hoàn trả
+                                                    </th>
+                                                    <th style="font-family: revert;font-size: 13px;">Trạng thái</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Trò chơi</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Tổng cược hợp lệ</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Tổng hoàn trả</th>
+                                                    <th style="font-family: revert;font-size: 13px;">Ghi chú: hoàn trả cược từ</th>
+                                                </tr>
+                                                <% if(dataApi.dataExport.length > 0) { %>
+                                                    <% dataApi.dataExport.forEach((data)=>{ %>
+                                                        <%
+                                                        let gameCategory = "";
+                                                        if (data.gameCategory=="RNG" ) {
+                                                            gameCategory = "Nổ Hũ";
+                                                        }else if (data.gameCategory=="FISH" ){
+                                                            gameCategory = "Bắn Cá";
+                                                        }else if (data.gameCategory=="PVP" ){
+                                                            gameCategory = "Game Bài";
+                                                        }else if (data.gameCategory=="LIVE" ){
+                                                            gameCategory = "Casino";
+                                                        }else if (data.gameCategory=="SPORTS" ){
+                                                            gameCategory = "Thể Thao";
+                                                        }else if (data.gameCategory=="ESPORTS" ){
+                                                            gameCategory = "Thể Thao Ảo";
+                                                        }else if (data.gameCategory=="COCKFIGHT" ){
+                                                            gameCategory = "Đá Gà";
+                                                        }else if (data.gameCategory=="ELOTTO" ){
+                                                            gameCategory = "Xổ Số";
+                                                        }
+                                                        %>
+                                                    <% 
+                                                    let ssId = '';
+                                                    if(data.sessionId != null){
+                                                        const parseSsId = data.sessionId.split("-");
+                                                        ssId = parseSsId[parseSsId.length - 1];
+                                                    }else{
+                                                        ssId = '';
+                                                    }
+                                                    %>
+                                                            <tr>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.moment(data.createdAt).format("HH:mm DD/MM/YYYY")%></th>
+                                                                <th style="font-family: serif;font-size: 15px;">
+                                                                    <% if (data.status=="pending") { %>
+                                                                    <div class="status success" style="background-color: #ffffff; border-color: #ffb24f; color: #f7b231;">Đang xử lý</div>
+                                                                    <% } else if (data.status=="error") { %>
+                                                                    <div class="status success" style="background-color: #ffffff; border-color: #ff9393; color: #ff4646;">Thất bại</div>
+                                                                    <% } else if (data.status=="success") { %>
+                                                                    <div class="status success">Đã hoàn trả</div>
+                                                                    <% }%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=gameCategory;%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.numberWithCommas(data.validBetAmount * 1000)%></th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.numberWithCommas(data.amountReturn * 1000)%> (<%=data.percentReturn%>%)</th>
+                                                                <th style="font-family: serif;font-size: 15px;"><%=dataPage.helpers.moment(data.timeFrom).format("HH:mm DD/MM/YYYY")%> đến <%=dataPage.helpers.moment(data.timeTo).format("HH:mm DD/MM/YYYY")%></th>
+                                                                
+                                                            </tr>
+
+                                                            <% }); %>
+                                                            <% }else { %>
+                                                            <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <% if(dataApi.dataExport.length <=0) { %>
+                                        <div class="text-center" style="min-height: 35px;padding: 17px;">
+                                            Không có dữ liệu
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+
+
+                                    <div class="text-center">
+                                        <div class="pagination-container">
+                                            <div class="nrc-pagination-wrapper">
+                                                <ul class="rc-pagination " unselectable="unselectable"
+                                                    id="phantrangUser">
+                                                    <li title="上一页" class="rc-pagination-disabled rc-pagination-prev"
+                                                        aria-disabled="true"><a></a></li>
+                                                    <li title="1"
+                                                        class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active">
+                                                        <a>1</a>
+                                                    </li>
+                                                    <li title="下一页" class="rc-pagination-disabled rc-pagination-next"
+                                                        aria-disabled="true"><a></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const phantrang = Pagination('<%=dataApi.page%>', '<%=dataApi.total%>', '<%=dataApi.kmess%>');
+        let phantrangBody = '';
+        phantrang.forEach((page) => {
+            $("#phantrangUser").html(phantrangBody);
+            let active = ('<%=dataApi.page%>' == page) ? "rc-pagination-item-active" : "";
+            const urlToPage = (page !== "...") ? `/account/refurn?page=${page}&limit=<%=dataApi.kmess%>` : `javascript:void(0)`;
+            phantrangBody += `
+                <li class="rc-pagination-item rc-pagination-item-1 ${active}">
+                    <a href="${urlToPage}"><b>${page}</b></a>
+                </li>
+            `;
+            $("#phantrangUser").html(phantrangBody);
+        });
+    </script>
+
+
+    <%- include('../../includes/footer') %>

@@ -1,0 +1,704 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/3283.6bbf191b.css">
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/d-Deposit.b0c7d9b1.css">
+
+    <div id="body-web-info">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">Nạp tiền vào tài khoản</div>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" style="cursor: pointer;"
+                                        onClick="showContent('deposit-manual')">Tự động</a></li>
+                                <li><a data-toggle="tab" style="cursor: pointer;"
+                                        onClick="javascript:void(alert(`Nạp thủ công đang được bảo trì!`))">Thủ công</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" style="margin-top: 24px;">
+
+                                <div class="nrc-tab-pane " id="tab-content-deposit-manual">
+                                    <div class="block deposit-payments" id="body-list-manual-bank">
+                                        <div class="scroll-wrapper">
+
+                                            <div class="deposit-list" id="selectDepositType">
+                                                <div class="deposit-list-item DEBIT_CARD" onclick="depositTypeCustom()">
+                                                    <h3>Trực tuyến 1</h3><small>50~1,000,000</small>
+                                                </div>
+                                                <div class="deposit-list-item MOMOPAY" onclick="depositTypeMomo()">
+                                                    <h3>MoMo PAY</h3><small>50~20,000</small>
+                                                </div>
+                                                <div class="deposit-list-item SCRATCHCARD"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>Thẻ cào điện thoại</h3><small>10~1,000</small>
+                                                </div>
+                                                <div class="deposit-list-item QR_BANK" onclick="depositTypeCustomQr()">
+                                                    <h3>Quét mã QR</h3><small>50~300,000</small>
+                                                </div>
+                                                <div class="deposit-list-item ONLINE_BANKING"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>Trực tuyến 2</h3><small>50~1,000,000</small>
+                                                </div>
+                                                <div class="deposit-list-item USDT"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>USDT</h3><small>10~200,000</small>
+                                                </div>
+                                                <div class="deposit-list-item COMPANY_DEPOSIT"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>Thanh toán tại quầy/ATM</h3><small>100~1,000,000</small>
+                                                </div>
+                                                <div class="deposit-list-item ZALOPAY"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>ZaLo PAY</h3><small>50~20,000</small>
+                                                </div>
+                                                <!-- <div class="deposit-list-item VIETTELPAY"
+                                                    onclick="javascript:void(alert(`Phương thức thanh toán đang được bảo trì!`))">
+                                                    <h3>VIETTELPAY</h3><small>50~30,000</small>
+                                                </div> -->
+                                            </div>
+
+                                            <div class="deposit-list" id="deposit-list-show" style="display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="block" id="body-request-manual-bank" style="display: none;">
+                                        <div class="title-wrapper">
+                                            <div class="left-cont" onclick="clickBack()"><i
+                                                    class="fa fa-caret-left"></i>
+                                            </div>
+                                            <div class="title">Quay lại</div>
+                                            <div class="right"></div>
+                                        </div>
+                                        <div class="mc-deposit">
+                                            <form>
+                                                <div class="mc-form-item">
+                                                    <div class="mc-detail">
+                                                        <div class="mc-detail-content">
+                                                            <div class="hiddenCode" style="display:none;"></div>
+                                                            <div class="mc-horizontal-item">
+                                                                <div class="mc-horizontal-item-main">
+                                                                    <div class="mc-horizontal-item-content"><label
+                                                                            class="">Tên ngân hàng</label>
+                                                                        <div class="mc-horizontal-item-value"
+                                                                            id="bankProvide"></div>
+                                                                    </div>
+                                                                    <div class="copy-text"
+                                                                        onclick="javascript:void(coppyToClipboard($('#bankProvide').html()))">
+                                                                        <i class="d20_small_copy" data-tip="copyText"
+                                                                            data-for="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            currentitem="false"
+                                                                            style="cursor: pointer; margin-left: 5px;color:#000"></i>
+                                                                        <div class="__react_component_tooltip taaf5f57b-33d3-4f93-8e64-156c90554edc place-top type-dark"
+                                                                            id="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            data-id="tooltip">
+                                                                            Copy
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mc-horizontal-item">
+                                                                <div class="mc-horizontal-item-main">
+                                                                    <div class="mc-horizontal-item-content"><label
+                                                                            class="">Chủ tài khoản</label>
+                                                                        <div class="mc-horizontal-item-value"
+                                                                            id="bankName"></div>
+                                                                    </div>
+                                                                    <div class="copy-text"
+                                                                        onclick="javascript:void(coppyToClipboard($('#bankName').html()))">
+                                                                        <i class="d20_small_copy" data-tip="copyText"
+                                                                            data-for="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            currentitem="false"
+                                                                            style="cursor: pointer; margin-left: 5px;color:#000"></i>
+                                                                        <div class="__react_component_tooltip taaf5f57b-33d3-4f93-8e64-156c90554edc place-top type-dark"
+                                                                            id="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            data-id="tooltip">
+                                                                            Copy
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mc-horizontal-item">
+                                                                <div class="mc-horizontal-item-main">
+                                                                    <div class="mc-horizontal-item-content"><label
+                                                                            class="">Số tài khoản</label>
+                                                                        <div class="mc-horizontal-item-value"
+                                                                            id="bankNumber"></div>
+                                                                    </div>
+                                                                    <div class="copy-text"
+                                                                        onclick="javascript:void(coppyToClipboard($('#bankNumber').html()))">
+                                                                        <i class="d20_small_copy" data-tip="copyText"
+                                                                            data-for="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            currentitem="false"
+                                                                            style="cursor: pointer; margin-left: 5px;color:#000"></i>
+                                                                        <div class="__react_component_tooltip taaf5f57b-33d3-4f93-8e64-156c90554edc place-top type-dark"
+                                                                            id="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            data-id="tooltip">
+                                                                            Copy
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mc-horizontal-item">
+                                                                <div class="mc-horizontal-item-main">
+                                                                    <div class="mc-horizontal-item-content"><label
+                                                                            class="">Nội dung chuyển khoản</label>
+                                                                        <div class="mc-horizontal-item-value"
+                                                                            id="content"></div>
+                                                                    </div>
+                                                                    <div class="copy-text"
+                                                                        onclick="javascript:void(coppyToClipboard($('#content').html()))">
+                                                                        <i class="d20_small_copy" data-tip="copyText"
+                                                                            data-for="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            currentitem="false"
+                                                                            style="cursor: pointer; margin-left: 5px;color:#000"></i>
+                                                                        <div class="__react_component_tooltip taaf5f57b-33d3-4f93-8e64-156c90554edc place-top type-dark"
+                                                                            id="4bd7c90f-9087-47af-8afa-753c929cb79d"
+                                                                            data-id="tooltip">
+                                                                            Copy
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mc-form-item">
+                                                    <div class="mc-input-field"><label
+                                                            class="mc-input-field-block mc-not-empty required"
+                                                            for="depositamt">
+                                                            <div class="mc-input-field-label">Nhập số tiền</div>
+                                                            <div class="mc-input-base"><input type="number"
+                                                                    name="amountDeposit"
+                                                                    placeholder="0 - Không giới hạn"
+                                                                    class="mc-input-field-value" id="amountDeposit"
+                                                                    value="" onchange="onChangerCoin()">
+                                                                <div class="mc-input-field-suffix">VND(k)</div>
+                                                            </div>
+                                                            <div class="mc-input-amount-field">
+                                                                <div class="mc-input-convert-amount" style="color:#000">
+                                                                    = 0 VND</div>
+                                                                <div class="mc-input-convert-rule">Đơn vị tính là 1:1000
+                                                                </div>
+                                                            </div>
+                                                        </label></div>
+                                                </div>
+
+                                                <div class="mc-reminder">Lưu ý: Bắt buộc chuyển khoản chính xác nội
+                                                    dung, thông tin người gửi tiền phải chính xác,
+                                                    nhập sai sẽ không tự động lên điểm</div>
+                                                <div class="mc-btn-wrapper">
+                                                    <button title="" class="nrc-button" id="btnDeposit"
+                                                        onclick="confirmTransaction()" type="button">Tạo Code</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="block" id="body-request-manual-card" style="display: none;">
+                                        <div class="title-wrapper">
+                                            <div class="left-cont" onclick="clickBackCard()"><i
+                                                    class="fa fa-caret-left"></i></div>
+                                            <div class="title">Quay lại</div>
+                                            <div class="right"></div>
+                                        </div>
+                                        <div class="mc-deposit">
+                                            <form>
+                                                <div class="mc-form-item">
+                                                    <div class="mc-input-field">
+                                                        <label class="mc-input-field-block mc-not-empty required"
+                                                            for="remarks" style="height: 59px;">
+                                                            <div class="mc-input-field-label">Nhà mạng cung cấp</div>
+                                                            <div class="mc-input-base">
+                                                                <select class="mc-input-field-value" id="network"
+                                                                    name="network"
+                                                                    style="background: transparent;border: none;color: #454545;flex: 1 100%;font-size: 14px;height: 100%;padding: 0;">
+                                                                    <option value=""> Vui lòng chọn nhà mạng</option>
+                                                                </select>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mc-form-item">
+                                                    <div class="mc-input-field">
+                                                        <label class="mc-input-field-block mc-not-empty required"
+                                                            for="remarks" style="height: 59px;">
+                                                            <div class="mc-input-field-label">Mệnh giá thẻ cào</div>
+                                                            <div class="mc-input-base">
+                                                                <select class="mc-input-field-value" id="amount"
+                                                                    name="amount"
+                                                                    style="background: transparent;border: none;color: #454545;flex: 1 100%;font-size: 14px;height: 100%;padding: 0;">
+                                                                    <option value=""> Vui lòng chọn mệnh giá</option>
+                                                                </select>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mc-form-item">
+                                                    <div class="mc-input-field"><label
+                                                            class="mc-input-field-block mc-not-empty required"
+                                                            for="depositamt">
+                                                            <div class="mc-input-field-label">Nhập mã thẻ cào</div>
+                                                            <div class="mc-input-base"><input type="number" name="pin"
+                                                                    id="pin" placeholder="Nhập mã thẻ cào..."
+                                                                    class="mc-input-field-value">
+                                                            </div>
+                                                            <div class="mc-input-amount-field">
+                                                                <div class="mc-input-convert-rule">Độ dài từ 11 đến 15
+                                                                    số
+                                                                </div>
+                                                            </div>
+                                                        </label></div>
+                                                </div>
+
+                                                <div class="mc-form-item">
+                                                    <div class="mc-input-field"><label
+                                                            class="mc-input-field-block mc-not-empty required"
+                                                            for="depositamt">
+                                                            <div class="mc-input-field-label">Nhập số serial</div>
+                                                            <div class="mc-input-base"><input type="number" name="seri"
+                                                                    id="seri" placeholder="Nhập số serial..."
+                                                                    class="mc-input-field-value">
+                                                            </div>
+                                                            <div class="mc-input-amount-field">
+                                                                <div class="mc-input-convert-rule">Độ dài từ 11 đến 15
+                                                                    số
+                                                                </div>
+                                                            </div>
+                                                        </label></div>
+                                                </div>
+
+                                                <div class="mc-reminder">Lưu ý: Bắt buộc nạp thẻ đúng, chính xác,
+                                                    nhập sai thông tin sẽ không tự động lên điểm</div>
+                                                <div class="mc-btn-wrapper">
+                                                    <button title="" class="nrc-button" id="btnDepositCard"
+                                                        onclick="confirmTransactionCard()" type="button">Nạp
+                                                        điểm</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="sub-content">
+                            <div class="title">Khuyến mãi</div>
+                            <div class="ads-block">
+                                <div class="promo-container">
+                                </div>
+                                <!-- SIDEBAR PROMOTION -->
+                                <%- include('./promotionSidebar') %>
+                                    <!-- SIDEBAR PROMOTION -->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let isRedirect = false;
+        $(document).ready(() => {
+            //getListManualBank();
+        });
+
+        const showContent = (target) => {
+            let arrTabElem = ['deposit-manual', 'deposit-auto', 'fund'];
+            arrTabElem.forEach((id) => {
+                let elementMenuProperti = $('#tab-menu-' + id);
+                let elementContentProperti = $('#tab-content-' + id);
+
+                if (target == id) {
+                    elementMenuProperti.addClass("active");
+                    elementContentProperti.fadeIn();
+                } else {
+                    elementMenuProperti.removeClass("active");
+                    elementContentProperti.hide();
+                }
+            });
+            if (target == 'deposit-manual') {
+                $('#deposit-list-show').fadeOut();
+                $('#selectDepositType').fadeIn();
+            };
+            //if (target == 'deposit-auto') null;
+        }
+
+        const depositType1 = () => {
+            isRedirect = false;
+            $('#selectDepositType').fadeOut();
+            $('#deposit-list-show').html(``);
+            $('#deposit-list-show').fadeIn();
+            getListManualBank();
+        }
+
+        const depositTypeQr = () => {
+            isRedirect = true;
+            $('#selectDepositType').fadeOut();
+            $('#deposit-list-show').html(``);
+            $('#deposit-list-show').fadeIn();
+            getListManualBank();
+        }
+
+        const depositTypeCustom = () => {
+            isRedirect = false;
+            $('#selectDepositType').fadeOut();
+            showBodyRequestManualBank('CUSTOM', 'CUSTOM PAYMENT');
+        }
+
+        const depositTypeCustomQr = () => {
+            isRedirect = true;
+            $('#selectDepositType').fadeOut();
+            showBodyRequestManualBank('CUSTOM', 'CUSTOM PAYMENT');
+        }
+
+
+        const depositTypeMomo = () => {
+            $('#selectDepositType').fadeOut();
+            showBodyRequestManualBank('MOMO', 'MOMO PAYMENT');
+        }
+
+        const depositTypeCard = () => {
+            isRedirect = false;
+            $('#selectDepositType').fadeOut();
+            $('#body-list-manual-bank').hide();
+            $('#body-request-manual-card').show();
+            getDataCard();
+        }
+
+        const getListManualBank = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/payment/getListAutoBankDeposit",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    const ListManualBank = response.data;
+
+                    ListManualBank.forEach((item) => {
+                        $('#deposit-list-show').append(`
+                            <div class="deposit-list-item DEBIT_CARD"
+                                onclick="showBodyRequestManualBank('${item.code}', '${item.shortName.toUpperCase()}')">
+                                <h3>${item.shortName.toUpperCase()}</h3><small>50~1,000,000</small>
+                            </div>
+                        `);
+                    });
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const getListBankDeposit = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/payment/getListBankDeposit",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    const ListBankDeposit = response.data;
+                    for (const item of ListBankDeposit) {
+                        $('#bankDeposit').append(`
+                    <option value="${item.code}">Ngân hàng ${item.code}</option>
+                    `);
+                    }
+
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const showBodyRequestManualBank = (bankId, name) => {
+            $('#body-list-manual-bank').hide();
+            $(".mc-detail").hide();
+            // $('#body-request-manual-bank').fadeIn();
+            $('.hiddenCode').html(bankId);
+            $('#bankProvide').html(bankId);
+
+            $('#body-list-manual-bank').hide();
+            $('#body-request-manual-bank').fadeIn();
+
+            // $.ajax({
+            // "url": "<%=dataPage.config.MAIN_API%>/api/payment/getDataRequestManualBank/" + bankId,
+            // "method": "GET",
+            // "timeout": 0,
+            // "headers": {
+            // "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+            // "Content-Type": "application/json",
+            // },
+            // }).done((response) => {
+            // if (response.status) {
+            // const data = response.data;
+
+            // $('#body-list-manual-bank').hide();
+            // $('#body-request-manual-bank').fadeIn();
+
+            // $('#bankProvide').html(data.bankProvide.toUpperCase());
+            // $('#bankName').html(data.bankName.toUpperCase());
+            // $('#bankNumber').html(data.bankNumber);
+            // $('#content').html(data.content.toUpperCase());
+            // getListBankDeposit();
+            // } else {
+            // alert(response.msg);
+            // }
+            // });
+        }
+
+        const clickBack = () => {
+            if ($('.hiddenCode').html() == 'momo') {
+                $('#body-request-manual-bank').hide();
+                $('#body-list-manual-bank').fadeIn();
+                $('#selectDepositType').fadeIn();
+                $('#hiddenCode').html(``);
+                clearBody();
+            } else {
+                $('#deposit-list-show').html('');
+                $('#body-list-manual-bank').fadeIn();
+                $('#body-request-manual-bank').hide();
+                $('#hiddenCode').html(``);
+                clearBody();
+                getListManualBank();
+            }
+
+        }
+
+        const clickBackCard = () => {
+            $('#body-request-manual-card').hide();
+            $('#body-list-manual-bank').fadeIn();
+            $('#selectDepositType').fadeIn();
+            clearBodyCard();
+        }
+
+        const coppyToClipboard = (text) => {
+            var input = document.createElement('input');
+            input.setAttribute('value', text);
+            document.body.appendChild(input);
+            input.select();
+            var result = document.execCommand('copy');
+            document.body.removeChild(input);
+            return toastr.success(
+                'Đã copy vào bộ nhớ tạm!',
+                "Thành công!"
+            );
+            return result;
+        }
+
+        const onChangerCoin = () => {
+            const inputCoin = $('#amountDeposit');
+            const elementShowChanged = $('.mc-input-convert-amount');
+
+            if (Number(inputCoin.val()) > 0) {
+                const xcoin = Number(inputCoin.val()) * 1000;
+                elementShowChanged.html(`= ${numberWithCommas(xcoin)} VND`);
+                inputCoin.val(Number(inputCoin.val()));
+            } else {
+                toastr.error(
+                    'Số tiền nạp phải là số tự nhiên lớn hơn 0',
+                    "Thất bại!"
+                );
+                inputCoin.val("");
+                elementShowChanged.html(`= 0 VND`);
+            }
+        }
+
+        const getDataCard = () => {
+            $.ajax({
+                "url": `<%=dataPage.config.MAIN_API%>/api/payment/getListAutoCardDeposit`,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>"
+                },
+            }).done((resp) => {
+                if (resp.status) {
+                    $('select[name="network"]').html(`<option value="">Vui lòng chọn nhà mạng</option>
+                                    `);
+                    $('select[name="amount"]').html(`<option value="">Vui lòng chọn mệnh giá</option>`);
+
+                    resp.data.cardCode.forEach((item) => {
+                        $('select[name="network"]').append(`
+                                    <option value="${item.toUpperCase()}">${item.toUpperCase()}</option>
+                                    `);
+                    });
+                    resp.data.amountValue.forEach((item) => {
+                        $('select[name="amount"]').append(`
+                                    <option value="${item}">${numberWithCommas(item)}</option>
+                                    `);
+                    });
+                } else {
+                    console.log(resp);
+                }
+            }).fail((data) => {
+                alert("Hệ thống gặp lỗi bất ngờ! Vui lòng thử lại!");
+            });
+        };
+
+        const confirmTransaction = () => {
+            try {
+                let amountDeposit = $('#amountDeposit').val();
+
+                if (!amountDeposit) {
+                    return toastr.error(
+                        "Vui lòng nhập đầy đủ thông tin trước khi nạp tiền!",
+                        "Thất bại!"
+                    );
+                }
+
+                amountDeposit = Number(amountDeposit * 1000);
+
+                $('#btnDeposit').prop('disabled', true);
+
+                const entryPoint = 'createRequestAutoBank';
+
+                $.ajax({
+                    "url": `<%=dataPage.config.MAIN_API%>/api/payment/${entryPoint}`,
+                    // "url": `https://api.csn365.com/api/payment/${entryPoint}`,
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        "Content-Type": "application/json",
+                    },
+                    "data": JSON.stringify({
+                        amount: String(amountDeposit),
+                        subType: $('.hiddenCode').html(),
+                    }),
+                }).done(function (response) {
+                    $('#btnDeposit').prop('disabled', false);
+                    if (response.status) {
+                        // $('#bankName').html(response.data.phoneName.toUpperCase());
+                        // $('#bankNumber').html(response.data.phoneNum);
+                        // $('#content').html(response.data.code);
+
+                        if (isRedirect) {
+                            alert(`Yêu cầu thành công! Nhấn để hiển thị mã QrCode!`);
+
+                            // window.open(response.data.qr_url, '', 'width=800, height=900');
+                            // window.location.reload();
+                            // Swal.fire({
+                            //     imageUrl: response.data.qrImageUrl,
+                            //     imageHeight: 445,
+                            //     imageAlt: 'Scan QrCode',
+                            //     allowOutsideClick: false,
+                            //     showCancelButton: false,
+                            //     confirmButtonText: 'Đóng'
+                            // });
+                            Swal.fire({
+                                title: `${response.data.bankCode} | ${response.data.bankName} | ${response.data.bankAccount}`,
+                                text: `Nội dung: ${response.data.content}`,
+                                imageUrl: response.data.qrImageUrl,
+                                imageWidth: 400,
+                                imageHeight: 400,
+                                imageAlt: "Thanh toán",
+                                confirmButtonText: 'Đóng'
+                            });
+                        } else {
+                            alert(`Tạo code nạp thành công! Vui lòng chuyển khoản đến thông tin vừa được tạo!`);
+                            window.open(response.data.payment_url, '', 'width=800, height=900');
+
+                            // $('#bankName').html(response.data.bankName.toUpperCase());
+                            // $('#bankNumber').html(response.data.bankAccount);
+                            // $('#content').html(response.data.content);
+                            // $(".mc-detail").show();
+                        }
+                        //clickBack();
+                    } else {
+                        alert(response.msg);
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+                alert(`Đã có lỗi xảy ra! vui lòng thử lại!`);
+            }
+        }
+
+        const confirmTransactionCard = () => {
+            try {
+                let amount = $('select[name="amount"]').val();
+                let network = $('select[name="network"]').val();
+                let pin = $('input[name="pin"]').val();
+                let seri = $('input[name="seri"]').val();
+
+                if (!amount || !network || !pin || !seri) {
+                    return toastr.error(
+                        "Vui lòng nhập đầy đủ thông tin trước khi nạp điểm!",
+                        "Thất bại!"
+                    );
+                }
+
+                $('#btnDepositCard').prop('disabled', true);
+                $.ajax({
+                    "url": `<%=dataPage.config.MAIN_API%>/api/payment/createRequestAutoCard`,
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        "Content-Type": "application/json",
+                    },
+                    "data": JSON.stringify({
+                        amount: String(amount),
+                        network, pin, seri
+                    }),
+                }).done(function (response) {
+                    $('#btnDepositCard').prop('disabled', false);
+                    if (response.status) {
+                        return toastr.success(
+                            response.msg,
+                            "Thành công!"
+                        );
+                    } else {
+                        // alert(response.msg);
+                        return toastr.error(
+                            response.msg,
+                            "Thất bại!"
+                        );
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+                alert(`Đã có lỗi xảy ra! vui lòng thử lại!`);
+            }
+        }
+
+
+        const clearBody = () => {
+            $('#bankName').html(``);
+            $('#bankNumber').html(``);
+            $('#content').html(``);
+        }
+
+        const clearBodyCard = () => {
+            $('input[name="pin"]').val(``);
+            $('input[name="seri"]').val(``);
+        }
+    </script>
+
+
+    <%- include('../../includes/footer') %>

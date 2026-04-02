@@ -1,0 +1,456 @@
+<%- include('../includes/header') %>
+
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Sales chart -->
+        <!-- ============================================================== -->
+        <div class="col-md-8 row" style="margin-bottom:10px;">
+            <div class="col-md-3 row" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <input type="text" name="inputDashboardFrom" class="form-control mydatepicker"
+                        placeholder="mm/dd/yyyy">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 row" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <input type="text" name="inputDashboardTo" class="form-control mydatepicker"
+                        placeholder="mm/dd/yyyy">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2 row">
+                <button onclick="caculatorProfit()" type="button" class="btn waves-effect waves-light btn-secondary"
+                    style="height: 33px; margin-top: 1px;">
+                    Kiểm tra
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-info">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h2 id="totalDeposit">0</h2>
+                                <h6 class="text-info mb-0">Tổng Nạp</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-info display-6"><i class="fas fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-primary">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="totalWithdraw">0</h2>
+                                <h6 class="text-primary mb-0">Tổng Rút</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-primary display-6">
+                                    <i class="fa-solid fa-money-bill-transfer"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-success">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="countProfit">0</h2>
+                                <h6 class="text-success mb-0">Lợi Nhuận</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-success display-6">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-bottom border-orange">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h2 id="totalVolume">0</h2>
+                                <h6 class="text-orange mb-0">Tổng Cược Hợp Lệ</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="text-orange display-6"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-pie-chart feather-xl">
+                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                                    </svg></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Ravenue - page-view-bounce rate -->
+        <!-- ============================================================== -->
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-orange">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-orange display-6">
+                                    <i class="fas fa-user-secret"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="countDownlineAgency" style="text-align: right;">0</h2>
+                                <h6 class="text-orange mb-0">Tổng số đại lý tuyến dưới</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-info">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-info display-6">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="countRefUser" style="text-align: right;">0</h2>
+                                <h6 class="text-info mb-0">Tổng số thành viên tuyến dưới</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="countUserNew" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">Thành viên tuyến dưới đăng ký mới</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-success">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-success display-6">
+                                    <i class="fa-solid fa-users"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="dashboard-total-users" style="text-align: right;">0</h2>
+                                <h6 class="text-success mb-0">Thành viên đăng ký của bạn</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-info">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-info display-6">
+                                    <i class="fa-solid fa-money-bill"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="countSumBalance" style="text-align: right;">0</h2>
+                                <h6 class="text-info mb-0">Tổng số dư của thành viên</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="countPlayProfit" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">Tổng thắng thua</h6>
+                                <!-- <h6 class="text-cyan mb-0">Nạp + Km + Hoàn trả - Số dư - Rút</h6> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-users feather-xl">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="totalNewDeposit" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">Tổng khách nạp mới</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-bar-chart-2 feather-xl">
+                                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="totalRefurn" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">Tổng hoàn trả thành viên</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-start border-cyan">
+                    <div class="card-body">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="text-cyan display-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-layers feather-xl">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="ms-auto">
+                                <h2 id="totalIncentive" style="text-align: right;">0</h2>
+                                <h6 class="text-cyan mb-0">Tổng khuyến mãi thành viên</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+
+
+
+    <script>
+        const caculatorProfit = () => {
+            blockUI(true);
+            return new Promise((resolve, reject) => {
+                const id = "<%=dataPage.session.user.id;%>";
+                $.ajax({
+                    "url": '<%=dataPage.config.API_SERVER%>/agency/getProfit/' + id + '?from=' + $('input[name="inputDashboardFrom"]').val() + '&to=' + $('input[name="inputDashboardTo"]').val(),
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    },
+                }).then((response) => {
+                    blockUI(false);
+                    resolve(true);
+                    if (response.status) {
+
+                        const dataProfit = response.data;
+                        let totalDownlineAgency = 0,
+                            totalVolume = 0,
+                            totalValidBet = 0,
+                            totalDeposit = 0,
+                            totalWithdraw = 0,
+                            totalUserRef = 0,
+                            totalUserNew = 0,
+                            totalProfit = 0,
+                            totalPlayProfit = 0,
+                            totalBalance = 0,
+                            totalWinLose = 0,
+                            totalSumBalance = 0,
+                            totalRefurn = 0,
+                            totalIncentive = 0,
+                            totalNewDeposit = 0;
+
+                        const dateCheckFrom = moment.utc($('input[name="inputDashboardFrom"]').val(), "DD/MM/YYYY").local().format("DDMMYYYY");
+                        const dateCheckTo = moment.utc($('input[name="inputDashboardTo"]').val(), "DD/MM/YYYY").local().format("DDMMYYYY");
+
+                        response.data.forEach((user) => {
+                            totalUserRef++;
+
+                            totalBalance += user.userInfo.coin;
+
+                            // caculator downline agency
+                            if (user.userInfo.role == "agency") totalDownlineAgency++;
+                            // caculator volume
+                            user.betRecord.forEach((bet) => {
+                                totalVolume += Number(bet.betAmount);
+                                totalValidBet += Number(bet.validBetAmount);
+                                totalPlayProfit += Number(bet.netPnl);
+                            });
+                            // caculator user refurn
+                            user.betRefurnRecord.forEach((refurn) => {
+                                totalRefurn += Number(refurn.amountReturn);
+                            });
+                            // caculator user incentive
+                            user.incentiveRecord.forEach((incentive) => {
+                                totalIncentive += Number(incentive.amount);
+                            });
+                            // caculator deposit
+                            user.depositRecord.forEach((deposit) => {
+                                if (deposit.is_first) totalNewDeposit++;
+                                totalDeposit += Number(deposit.amount);
+                            });
+                            // caculator withdraw
+                            user.withdrawRecord.forEach((withdraw) => {
+                                totalWithdraw += Number(withdraw.amount);
+                            });
+                            totalSumBalance += Number(user.userInfo.coin);
+                            // caculator new user register                            
+                            const userReg = moment.utc(user.userInfo.createdAt, "YYYY-MM-DDTHH:mm").local().format("DDMMYYYY");
+                            if (Number(userReg) >= Number(dateCheckFrom) && Number(userReg) <= Number(dateCheckTo)) {
+                                if (user.tag != "root_agency") {
+                                    totalUserNew++;
+                                }
+                            };
+                        });
+
+                        totalWinLose = totalDeposit + totalIncentive + totalRefurn - totalBalance - totalWithdraw;
+
+                        totalVolume = totalVolume * 1000;
+                        totalValidBet = totalValidBet * 1000;
+                        totalProfit = totalDeposit - totalWithdraw - totalIncentive - totalRefurn;
+                        totalPlayProfit = totalPlayProfit * 1000;
+                        totalUserRef = totalUserRef - response.totalUsers.length;
+
+                        $('#countDownlineAgency').html(numberWithCommas(totalDownlineAgency));
+                        $('#countRefUser').html(numberWithCommas(totalUserRef));
+                        $('#countUserNew').html(numberWithCommas(totalUserNew));
+                        $('#totalVolume').html(numberWithCommas(totalVolume));
+                        $('#totalValidBet').html(numberWithCommas(totalValidBet));
+                        $('#totalDeposit').html(numberWithCommas(totalDeposit));
+                        $('#totalWithdraw').html(numberWithCommas(totalWithdraw));
+                        $('#countProfit').html(numberWithCommas(totalProfit));
+                        $('#countPlayProfit').html(numberWithCommas(totalWinLose));
+                        $('#countSumBalance').html(numberWithCommas(totalSumBalance));
+                        $('#dashboard-total-users').html(numberWithCommas(response.totalUsers.length));
+                        $('#totalRefurn').html(numberWithCommas(totalRefurn));
+                        $('#totalIncentive').html(numberWithCommas(totalIncentive));
+                        $('#totalNewDeposit').html(numberWithCommas(totalNewDeposit));
+
+                    } else {
+                        toastr.error(
+                            response.msg,
+                            "Error!"
+                        );
+                    }
+                }).catch((err) => {
+                    blockUI(false);
+                    resolve(true);
+                    console.log(err);
+                    toastr.error(
+                        err.responseJSON.msg,
+                        "Error!"
+                    );
+                });
+            });
+        }
+
+
+
+        $(document).ready(() => {
+            // Set default value
+            $('input[name="inputDashboardFrom"]').val(moment().format("DD/MM/YYYY"));
+            $('input[name="inputDashboardTo"]').val(moment().format("DD/MM/YYYY"));
+
+            // Date Picker  
+            $('input[name="inputDashboardFrom"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('input[name="inputDashboardTo"]').datepicker({
+                language: 'vi',
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            blockUI(true);
+            caculatorProfit().then((success) => blockUI(false));
+        });
+    </script>
+
+
+
+    <%- include('../includes/footer') %>

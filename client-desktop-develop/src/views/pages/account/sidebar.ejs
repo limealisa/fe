@@ -1,0 +1,103 @@
+<div class="left">
+    <div class="info-block">
+        <div class="name">
+            <%=dataPage.session.user.username%>
+        </div>
+        <span>VND(k)</span>
+        <div class="current-money">
+            <%=dataPage.helpers.numberWithCommas(dataPage.session.user.coin)%>
+        </div>
+    </div>
+    <div class="menu-block">
+        <ul class="list-menu">
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('profile'))"
+                    class="<%=(dataPage.location=='profile')?'active':'';%>">
+                    <i class="fa-regular fa-user"></i>
+                    Thông tin tài khoản
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('vip'))" class="<%=(dataPage.location=='vip')?'active':'';%>">
+                    <i class="fa-regular fa-star"></i>
+                    Thành viên VIP
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('deposit'))"
+                    class="<%=(dataPage.location=='deposit')?'active':'';%>">
+                    <i class="fa-solid fa-hand-holding-dollar"></i> Nạp tiền vào tài khoản</a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('withdraw'))"
+                    class="<%=(dataPage.location=='withdraw')?'active':'';%>">
+                    <i class="fa-solid fa-dollar-sign"></i> Rút tiền về ngân hàng
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('wallet-transfer'))"
+                    class="<%=(dataPage.location=='wallet-transfer')?'active':'';%>">
+                    <i class="fa-solid fa-exchange"></i> Chuyển quỹ trò chơi
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('game-history'))"
+                    class="<%=(dataPage.location=='game-history')?'active':'';%>">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử trò chơi
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('refurn'))"
+                    class="<%=(dataPage.location=='refurn-history')?'active':'';%>">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử hoàn trả
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('finan-history'))"
+                    class="<%=(dataPage.location=='finan-history')?'active':'';%>">
+                    <i class="fa-solid fa-arrows-rotate"></i> Giao dịch nạp rút
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(loadContent('inbox'))" class="<%=(dataPage.location=='inbox')?'active':'';%>">
+                    <i class="fa-regular fa-envelope"></i> Thông báo - Sự kiện
+                </a>
+            </li>
+            <% if (dataPage.session.user.role=="agency" ) { %>
+                <li class="menu-item">
+                    <a href="javascript:void(loadContent('agency'))"
+                        class="<%=(dataPage.location=='agency')?'active':'';%>">
+                        <i class="fa fa-sitemap"></i> Đại lý hoa hồng
+                    </a>
+                </li>
+                <% } %>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const loadContent = (target) => {
+        let arrSidebarMenuId = [
+            'profile',
+            'deposit',
+            'withdraw',
+            'wallet-transfer',
+            'game-history',
+            'refurn',
+            'finan-history',
+            'inbox'
+        ];
+        arrSidebarMenuId.forEach((id) => {
+            let elementProperti = $('#sidebar_' + id);
+            if (target == id) {
+                elementProperti.addClass("active");
+            } else {
+                elementProperti.removeClass("active");
+            }
+        });
+
+        setTimeout(() => {
+            window.location = "/account/" + target;
+        })
+    }
+</script>

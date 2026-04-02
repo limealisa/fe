@@ -1,0 +1,490 @@
+<%- include('../../includes/header') %>
+    <script src="https://rawgit.com/acidjazz/json-browse/master/json-browse/jquery.json-browse.js"></script>
+    <link href="https://rawgit.com/acidjazz/json-browse/master/json-browse/jquery.json-browse.css" type="text/css" rel="stylesheet" />
+
+    <style type="text/css">
+        textarea#json-input {
+            width: 100%;
+            height: 200px;
+        }
+
+        pre#json-renderer {
+            border: 1px solid #aaa;
+            padding: 0.5em 1.5em;
+        }
+    </style>
+
+    <script>
+        $(document).ready(() => {
+            setTimeout(() => {
+                // colapse sidebar
+                $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
+                $("#main-wrapper").addClass("mini-sidebar");
+            }, 100);
+        });
+    </script>
+
+    <div class="container-fluid">
+        <!-- -------------------------------------------------------------- -->
+        <!-- Start Page Content -->
+        <!-- -------------------------------------------------------------- -->
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-header border-bottom title-part-padding d-flex align-items-center">
+                        <h4 class="card-title"><%=dataPage.title%></h4>
+                        <div class="card-actions ms-auto d-flex button-group">
+                          <a class="mb-0 btn-minimize link d-flex align-items-center" data-action="expand">
+                            <i class="ri-fullscreen-line fs-6"></i>
+                          </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h6 class="card-subtitle mb-3">
+                            <code>Chỉ chỉnh sửa khi biết rõ mình đang làm gì!</code>
+                        </h6> -->
+                        <div class="table-responsive">
+                            <table id="table-container" class="table customize-table table-bordered mb-10 v-middle">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th>Trạng thái</th>
+                                        <th>Tên cấu hình</th>
+                                        <th>Tên nhà cung cấp</th>
+                                        <th>Cấu hình API</th>
+                                        <th>Mô tả</th>
+                                        <th>Logo</th>
+                                        <th>Ngày Tạo</th>
+                                        <th class="text-center">Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="product-list">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="d-flex border-bottom title-part-padding align-items-center">
+                        <div>
+                            <h4 class="card-title mb-0">
+                                Thêm cấu hình API trò chơi
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h6 class="card-subtitle mb-3">
+                            <code>Chỉ thêm khi biết rõ mình đang làm gì!</code>
+                        </h6> -->
+                        <form class="" id="addProductForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success"
+                                    placeholder="Tên cấu hình API (vd: API_1, API_2)" id="api_name">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="far fa-credit-card"></i> <span
+                                        class="border-start border-success ps-3">Tên cấu hình API (vd: API_1,
+                                        API_2)</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success"
+                                    placeholder="Tên nhà cung cấp (vd: TCGaming)" id="api_product">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-keyboard"></i> <span
+                                        class="border-start border-success ps-3">Tên nhà cung cấp (vd: TCGaming)</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <div class=" border-top">
+                                    <div class="mb-3 mt-4">
+                                        <label>Cấu hình API (được cung cấp từ nhà cung cấp)</label>
+                                        <textarea class="form-control" rows="5" id="api_config"
+                                            style="border-color: var(--bs-success);"
+                                            placeholder="Vui lòng nhập cấu hình API ở định dạng json"></textarea>
+                                    </div>
+
+                                    <button type="button" onclick="beautyJson()"
+                                        class="btn btn-success rounded-pill px-4">
+                                        <i class="fas fa-code"></i>
+                                        Beauty JSON
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success"
+                                    placeholder="Mô tả về nhà cung cấp này" id="description">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-qrcode"></i> <span
+                                        class="border-start border-success ps-3">Mô tả về nhà cung cấp này</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="url" class="form-control border border-success" placeholder="Hình ảnh logo"
+                                    id="logo">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-qrcode"></i> <span
+                                        class="border-start border-success ps-3">Hình ảnh logo</span>
+                                </label>
+                            </div>
+                            <div class="d-md-flex align-items-center">
+                                <div class="mt-3 mt-md-0 ms-auto">
+                                    <button type="submit" class="btn btn-success">
+                                        <div class="d-flex align-items-center">
+                                            Thêm cấu hình
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- row -->
+        <!-- -------------------------------------------------------------- -->
+        <!-- End PAge Content -->
+        <!-- -------------------------------------------------------------- -->
+
+        <div class="modal fade" id="api-show-config-modal" tabindex="-1" aria-labelledby="exampleModalLabel1">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center">
+                        <h4 class="modal-title" id="exampleModalLabel1">
+                            Cấu hình API trò chơi
+                        </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <pre id="api-show-config-modal-content" class="json-body"></pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="
+                        btn btn-light-danger
+                        text-danger
+                        font-weight-medium
+                        " data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $('#table-container').DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+            order: [[0, 'desc']],
+        });
+
+        function beautyJson() {
+            try {
+                const ugly = $("textarea[id=api_config]").val();
+                var obj = JSON.parse(ugly);
+                var pretty = JSON.stringify(obj, undefined, 4);
+                $("textarea[id=api_config]").val(pretty);
+                return true;
+            } catch (e) {
+                toastr.error(
+                    "Cấu hình không hợp lệ!",
+                    "Error!"
+                );
+                return false;
+            }
+        }
+
+        function isJson(item) {
+            let value = typeof item !== "string" ? JSON.stringify(item) : item;
+            try {
+                value = JSON.parse(value);
+            } catch (e) {
+                return false;
+            }
+
+            return typeof value === "object" && value !== null;
+        }
+
+        let LIST_API_CONFIG = [];
+
+        $(document).ready(() => {
+            getListApiConfig();
+        });
+
+        const getListApiConfig = async () => {
+            let config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: '<%=dataPage.config.API_SERVER%>/setting-api/api-config',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer <%=dataPage.session.accessToken%>',
+                }
+            };
+
+            $.ajax(config).done(function (response) {
+                if (response.status) {
+                    const data = response.data;
+                    LIST_API_CONFIG = data;
+                    $("#product-list").html("");
+                    let body = "";
+                    data.forEach((item) => {
+                        body += `
+                        <tr>
+                            <td>
+                                ${(item.is_mainternance) ? "Đang bảo trì" : "Hoạt động"}
+                            </td>
+                            <td>
+                                ${item.api_name}
+                            </td>
+                            <td>
+                                ${item.api_product}
+                            </td>
+                            <td>
+                                <button style="margin-left: 10px;"
+                                    onclick="onShowConfigApi('${item.api_name}')" type="button"
+                                    class="btn btn-sm waves-effect waves-light btn-primary"><span
+                                        class="btn-icon-left">
+                                        <b><i class="fa fa-code color-dark"></i></b>
+                                    </span><b>Xem cấu hình</b>
+                                </button>
+                            </td>
+                            <td>
+                                ${(item.description == null) ? "" : item.description}
+                            </td>
+                            <td>
+                                <img style="margin-top: -6px; width: 35px;" src="${item.logo}"
+                                    class="img-fluid user-img">
+                            </td>
+                            <td>
+                                ${moment(item.createdAt).format("HH:mm:ss DD/MM/YYYY")}
+                            </td>
+                            <td class="text-center">
+                                <button style="margin-left: 10px;"
+                                    onclick="deleteDailyConfirm('${item.id}')" type="button"
+                                    class="btn btn-sm waves-effect waves-light btn-danger"><span
+                                        class="btn-icon-left">
+                                        <b><i class="fa fa-trash color-dark"></i></b>
+                                    </span><b>Xóa</b>
+                                </button>
+                            </td>
+                        </tr>
+                        `;
+                    });
+                    $('#product-list').html(body);
+                }
+            });
+        }
+
+        const getListProductConfig = async () => {
+            let config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: '<%=dataPage.config.API_SERVER%>/setting-api/product-config',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer <%=dataPage.session.accessToken%>',
+                }
+            };
+
+            $.ajax(config).done(function (response) {
+                if (response.status) {
+                    const data = response.data;
+                    $("#product-list").html("");
+                    let body = "";
+                    data.forEach((item) => {
+                        body += `
+                        <tr>
+                            <td>
+                                ${(item.is_mainternance) ? "Đang bảo trì" : "Hoạt động"}
+                            </td>
+                            <td>
+                                ${item.product_api}
+                            </td>
+                            <td>
+                                ${item.product_name}
+                            </td>
+                            <td>
+                                ${item.product_code}
+                            </td>
+                            <td>
+                                ${item.product_type}
+                            </td>
+                            <td>
+                                ${(item.description == null) ? "" : item.description}
+                            </td>
+                            <td>
+                                <img style="margin-top: -6px; width: 35px;" src="${item.logo}"
+                                    class="img-fluid user-img">
+                            </td>
+                            <td>
+                                <img style="margin-top: -6px; width: 35px;" src="${item.thumbnail}"
+                                    class="img-fluid user-img">
+                            </td>
+                            <td>
+                                <img style="margin-top: -6px; width: 35px;" src="${item.icon}"
+                                    class="img-fluid user-img">
+                            </td>
+                            <td>
+                                ${moment(item.createdAt).format("HH:mm:ss DD/MM/YYYY")}
+                            </td>
+                            <td class="text-center">
+                                <button style="margin-left: 10px;"
+                                    onclick="deleteDailyConfirm('${item.id}')" type="button"
+                                    class="btn btn-sm waves-effect waves-light btn-danger"><span
+                                        class="btn-icon-left">
+                                        <b><i class="fa fa-trash color-dark"></i></b>
+                                    </span><b>Xóa</b>
+                                </button>
+                            </td>
+                        </tr>
+                        `;
+                    });
+                    $('#product-list').html(body);
+                }
+            });
+        }
+
+        $('#addProductForm').on('submit', (e) => {
+            e.preventDefault();
+
+            const api_name = $("input[id=api_name]").val();
+            const api_product = $("input[id=api_product]").val();
+            const api_config = $("textarea[id=api_config]").val();
+            const description = $("input[id=description]").val();
+            const logo = $("input[id=logo]").val();
+
+            console.log(api_name,
+                api_product,
+                api_config,
+                description,
+                logo);
+
+            if (!api_name ||
+                !api_product ||
+                !api_config ||
+                !description ||
+                !logo
+            ) {
+                toastr.error(
+                    "Vui lòng điền đầy đủ thông tin.",
+                    "Error!"
+                );
+                return;
+            }
+
+            if (!isJson(api_config)) {
+                toastr.error(
+                    "Cấu hình không hợp lệ!",
+                    "Error!"
+                );
+                return;
+            }
+
+            cuteAlert({
+                type: "question",
+                title: "Hành Động",
+                message: "Bạn có chắc chắn các thông tin vừa nhập?",
+                confirmText: "Đồng ý",
+                cancelText: "Hủy"
+            }).then((e) => {
+                if (e == 'confirm') {
+                    $.ajax({
+                        "url": `<%=dataPage.config.API_SERVER%>/setting-api/api-config`,
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            api_name,
+                            api_product,
+                            api_config: JSON.parse(api_config),
+                            description,
+                            logo
+                        })
+                    }).then((response) => {
+                        if (response.status) {
+                            toastr.success(
+                                "Thành công.",
+                                "Success!"
+                            );
+                            // setTimeout(() => {
+                            //     window.location = "";
+                            // }, 1000);
+                        } else {
+                            toastr.error(
+                                response.msg,
+                                "Error!"
+                            );
+                        }
+                    }).catch((err) => {
+                        console.log(err);
+                        toastr.error(
+                            err.responseJSON.msg,
+                            "Error!"
+                        );
+                    });
+                }
+            });
+
+        });
+
+        const deleteDailyConfirm = (id) => {
+            cuteAlert({
+                type: "question",
+                title: "Hành Động",
+                message: "Bạn có muốn xóa nó không?",
+                confirmText: "Đồng ý",
+                cancelText: "Hủy"
+            }).then((e) => {
+                if (e == 'confirm') {
+                    $.ajax({
+                        "url": '<%=dataPage.config.API_SERVER%>/setting-api/api-config/' + id + '/delete',
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        },
+                        "data": {}
+                    }).then((response) => {
+                        if (response.status) {
+                            toastr.success(
+                                "Thành công.",
+                                "Success!"
+                            );
+                            setTimeout(() => {
+                                window.location = "";
+                            }, 700);
+                        } else {
+                            toastr.error(
+                                response.msg,
+                                "Error!"
+                            );
+                        }
+                    }).catch((err) => {
+                        console.log(err);
+                        toastr.error(
+                            err.responseJSON.msg,
+                            "Error!"
+                        );
+                    });
+
+                }
+            });
+        }
+
+        const onShowConfigApi = (api_name) => {
+            const config = LIST_API_CONFIG.find((config) => (config.api_name == api_name)).api_config;
+            $('#api-show-config-modal-content').jsonBrowse(config);
+            $("#api-show-config-modal").modal("show");
+        }
+    </script>
+    <%- include('../../includes/footer') %>

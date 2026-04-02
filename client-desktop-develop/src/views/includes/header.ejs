@@ -1,0 +1,709 @@
+<html lang="en">
+<link type="text/css" rel="stylesheet" id="dark-mode-custom-link">
+<link type="text/css" rel="stylesheet" id="dark-mode-general-link">
+<style lang="en" type="text/css" id="dark-mode-custom-style"></style>
+<style lang="en" type="text/css" id="dark-mode-native-style"></style>
+<style lang="en" type="text/css" id="dark-mode-native-sheet"></style>
+<script type="text/javascript" id="custom-useragent-string-page-script"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>
+        <%=dataPage.session.siteConfig.site_name;%>
+    </title>
+    <meta name="apple-mobile-web-app-title" content="<%=dataPage.session.siteConfig.site_name;%>">
+    <meta name="description" content="<%=dataPage.session.siteConfig.site_description;%>">
+    <meta name="keywords" content="<%=dataPage.session.siteConfig.site_keyword;%>">
+    <link rel="shortcut icon" href="https://cdn.csn365.com/upload/images/9ce6d7c708658c8c91c11d7de92ca19b.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"
+        integrity="sha512-5TGRCl3hPoqtruhO+mubTuySHOfcEBvyIfiWHoCK8wDLmf6C1U73OUoNCU6ZvyT/8vfCcha1INDIo8dabDmQjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="/web/nato888/css/app.css?ver=1675336185">
+    <link rel="stylesheet" href="/web/nato888/css/config.css?ver=1675336185">
+    <link rel="stylesheet" href="/web/nato888/css/popup.css?ver=1675336185">
+    <link rel="stylesheet" href="/web/nato888/css/common.css?ver=1675336185">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- MomentJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-1970-2030.js"></script>
+    <!-- Toastr CSS -->
+    <link href="/web/nato888/lib/toastr/toastr.min.css" rel="stylesheet" />
+    <script src="/web/nato888/lib/toastr/toastr.min.js"></script>
+    <!-- Helper Functions-->
+    <script src="/web/static/js/helpers.js"></script>
+
+    <script>
+        var windows = [];
+        let isLogin = false;
+        let bearerToken = "";
+        let mainApi = "<%=dataPage.config.MAIN_API%>";
+    </script>
+    <% if (dataPage.session.user) { %>
+        <script>
+            isLogin = true;
+            bearerToken = "<%=dataPage.session.accessToken%>";
+        </script>
+        <% } %>
+</head>
+
+<body class="gi8viet">
+    <div id="shortcut_list">
+        <a target="_blank" href="<%=dataPage.session.siteConfig.contact.telegram;%>" class="item">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <span>CSKH</span>
+        </a>
+        <!-- <a target="_blank" href="<%=dataPage.session.siteConfig.contact.fanpage;%>" class="item">
+            <i class="fa-brands fa-facebook"></i>
+            <span>Facebook</span>
+        </a>
+        <a target="_blank" href="<%=dataPage.session.siteConfig.contact.telegram;%>" class="item">
+            <i class="fa-brands fa-telegram"></i>
+            <span>Telegram</span>
+        </a>
+        <a href="tel:<%=dataPage.session.siteConfig.contact.hotline;%>" class="item">
+            <i class="fa-solid fa-phone"></i>
+            <span>Điện thoại</span>
+        </a> -->
+        <!-- <a href="mailto:<%=dataPage.session.siteConfig.contact.email;%>" class="item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Gmail</span>
+        </a> -->
+    </div>
+
+
+    <div id="wrapper">
+        <header>
+            <div class="login-header ">
+                <div class="login_wrapper" style="width: 85%">
+                    <div class="time-wrapper">
+                        <span class="now-time">?/?/?, ?:?:?? ???</span>
+                        <div class="affiliate_service"><span><a style="text-decoration: none; color: #65a4ff"
+                                    href="http://ag.csn365.com">Đại lý</a></span></div>
+                    </div>
+                    <div class="login_btns isLogin ">
+                        <% if (dataPage.session.user) { %>
+                            <div data-v-a5d500de="" class="logined_wrap">
+                                <div data-v-a5d500de="" class="wrap VI ">
+                                    <div data-v-a5d500de="" class="logined_item nickname">
+                                        <a class="logined-item special" href="/account/profile">
+                                            <i data-v-a5d500deXd="" class="name_icon"></i> <span class="name">
+                                                <%=dataPage.session.user.username%>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div data-v-a5d500de="" class="logined_item">
+                                        <a href="/account/wallet-transfer"> <i class="fa fa-exchange" aria-hidden="true"
+                                                style="margin-right: 5px;"></i> Chuyển Quỹ</a>
+                                    </div>
+                                    <div data-v-a5d500de="" class="logined_item balance">
+                                        <a class="logined-item" href="/account/deposit">
+                                            <i data-v-a5d500de="" class="balance_icon"></i></a>
+                                        <span data-v-a5d500de="">
+                                            <a class="logined-item special transfer-money-game"
+                                                href="javascript:void(0)" class="current-wallet"
+                                                onclick="refresWallet()">
+                                                <%=dataPage.helpers.numberWithCommas(dataPage.session.user.coin)%> VNĐ
+                                                    <i class="fa-solid fa-arrows-rotate" style="margin-left: 5px;"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                    <div data-v-a5d500de="" class="logined_item">
+                                        <a href="/account/deposit"> <i data-v-a5d500de="" class="deposit_icon"></i>
+                                            Nạp tiền</a>
+                                    </div>
+                                    <div data-v-a5d500de="" class="logined_item unreadMessage">
+                                        <a href="/account/inbox"> <i data-v-a5d500de="" class="msg_icon"></i>
+                                            Thông báo</a>
+                                    </div>
+                                    <div data-v-a5d500de="" class="logined_item out">
+                                        <a class="" href="/auth/logout"><i data-v-a5d500de="" class="logout_icon"></i>
+                                            Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                const refresWallet = () => {
+                                    try {
+                                        $('.fa-arrows-rotate').addClass('fa-spin');
+
+                                        setTimeout(() => {
+                                            $.ajax({
+                                                "url": "<%=dataPage.config.MAIN_API%>/api/auth/me",
+                                                "method": "GET",
+                                                "timeout": 0,
+                                                "headers": {
+                                                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                                                    "Content-Type": "application/json"
+                                                },
+                                            }).done(function (response) {
+                                                $('.fa-arrows-rotate').removeClass('fa-spin');
+                                                if (response.status) {
+                                                    const data = response.user;
+                                                    $('.current-wallet').html(`${numberWithCommas(response.user.coin)} VND <i class="fa-solid fa-arrows-rotate" style="margin-left: 5px;"></i>`);
+                                                } else {
+                                                    alert(response.msg);
+                                                }
+                                            });
+                                        }, 1000);
+
+                                    } catch (e) {
+                                        console.log(e);
+                                        alert("Đã có lỗi xảy ra, vvui lòng thử lại!")
+                                    }
+                                }
+                            </script>
+                            <% }else{ %>
+
+                                <div data-v-6bfc405e="" class="login_content">
+                                    <div data-v-6bfc405e="" class="username_login">
+                                        <form method="GET" action="/" data-v-6bfc405e="" autocomplete="off"
+                                            id="login-form">
+                                            <div data-v-6bfc405e="" class="form_item">
+                                                <input data-v-6bfc405e="" type="text" autocomplete="off" name="username"
+                                                    placeholder="Tên đăng nhập" class="username_input"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <div data-v-6bfc405e="" class="form_item">
+                                                <input data-v-6bfc405e="" autocomplete="new-password"
+                                                    placeholder="Mật khẩu" type="password" name="password"
+                                                    class="password_input" aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <a href="javascript:void(callPopupForgotPassword(true))" data-v-6bfc405e=""
+                                                class="forget_box forget-pass text-dark mr-2">Quên
+                                                mật khẩu</a>
+                                            <div data-v-6bfc405e="" class="join-select">
+                                                <button data-v-6bfc405e="" type="submit"
+                                                    style="background-image: unset;color: #ce3900;background-color: #fff;"
+                                                    class="btn_join hover">
+                                                    Đăng nhập
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <div data-v-6bfc405e="" class="join-select">
+                                            <a data-v-6bfc405e="" href="/auth/register" class="btn_join hover">Đăng
+                                                ký</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $(document).ready(() => {
+                                        $('#login-form').on('submit', (e) => {
+                                            e.preventDefault();
+                                            try {
+                                                const username = $('input[class=username_input]').val();
+                                                const password = $('input[class=password_input]').val();
+                                                if (!username || !password) {
+                                                    return toastr.error(
+                                                        "Vui lòng nhập tài khoản và mật khẩu!",
+                                                        "Thất bại!"
+                                                    );
+                                                }
+
+                                                $.ajax({
+                                                    "url": "/auth/login",
+                                                    "method": "POST",
+                                                    "timeout": 0,
+                                                    "headers": {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    "data": JSON.stringify({
+                                                        "username": username,
+                                                        "password": password
+                                                    }),
+                                                }).done(function (response) {
+                                                    if (response.status) {
+                                                        console.log(response);
+                                                        setTimeout(() => {
+                                                            window.location = "/";
+                                                        }, 200);
+                                                    } else {
+                                                        // alert(response.msg);
+                                                        return toastr.error(
+                                                            response.msg,
+                                                            "Thất bại!"
+                                                        );
+                                                    }
+                                                });
+
+                                            } catch (e) {
+                                                console.log(e);
+                                                alert('Có lỗi xảy ra, vui lòng thử lại!');
+                                            }
+                                        });
+                                    });
+                                </script>
+                                <% } %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="bottom-head">
+                <div class="container-web" style="width: 83%;">
+                    <div class="logo">
+                        <a href="/" style="height:100%;">
+                            <img style="margin-top: 3px;width: 108px;height: auto;"
+                                src="<%=dataPage.session.siteConfig.site_logo;%>" alt="">
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="main-menu" style="margin-right: 45px;">
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="/gamelobby/live/all">Casino</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame(`DG`, `DG0013`);" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/898/44a85592-58b6-4417-a10f-a735a24263a9.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/898/44a85592-58b6-4417-a10f-a735a24263a9.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame(`SEX`, `SEX001`);" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/882/sub-live-sexybcrt.png" alt=""
+                                                    src="/web/nato888/storage/882/sub-live-sexybcrt.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('WM', 'WM0001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/908/sub-live-wm.png" alt=""
+                                                    src="/web/nato888/storage/908/sub-live-wm.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('EG', 'EG0001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/903/7f9b5980-965d-4ba0-871c-59b33450783c.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/903/7f9b5980-965d-4ba0-871c-59b33450783c.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame(`AG`, `A00070`);" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/887/ec6059ef-434a-4f85-a0b2-a8cadd5cedc5.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/887/ec6059ef-434a-4f85-a0b2-a8cadd5cedc5.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame(`SA`, `SA0001`);" class="">
+                                                <img class=" lazyloaded" data-src="https://i.imgur.com/CbAax2z.png"
+                                                    alt="" src="https://i.imgur.com/CbAax2z.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('MG', 'MG0001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/931/sub-live-mg.png" alt=""
+                                                    src="/web/nato888/storage/931/sub-live-mg.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('BB', 'BBB001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/913/a2f7ab8f-3cd2-4eb6-9b70-8b71d2401902.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/913/a2f7ab8f-3cd2-4eb6-9b70-8b71d2401902.png">
+                                            </a>
+                                        </li>
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('BG', 'BG0001', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1055/2.png"
+                                                    alt="" src="/web/nato888/storage/1055/2.png">
+                                            </a>
+                                        </li> -->
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('HG', 'HG0001', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1131/d5.png"
+                                                    alt="" src="/web/nato888/storage/1131/d5.png">
+                                            </a>
+                                        </li> -->
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('VV', 'VV0001', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1136/b5.png"
+                                                    alt="" src="/web/nato888/storage/1136/b5.png">
+                                            </a>
+                                        </li> -->
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('PP', 'PP0001');" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1141/c5.png"
+                                                    alt="" src="/web/nato888/storage/1141/c5.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="javascript:;">Thể Thao</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('SBO', 'SBO041');" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/918/sub-sports-sbobet.png" alt=""
+                                                    src="/web/nato888/storage/918/sub-sports-sbobet.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('SB', 'SB0001');" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1376/sub-sports-saba.png" alt=""
+                                                    src="/web/nato888/storage/1376/sub-sports-saba.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('CMD', 'CMD001');" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/923/07030d3f-adef-4dc4-bea1-026a22d1cce4.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/923/07030d3f-adef-4dc4-bea1-026a22d1cce4.png">
+                                            </a>
+                                        </li>
+
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('UG', 'UG2001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="https://cdn.csn365.com/upload/images/7dd418b9baeeb7a67c01c2c154f7fcc9.png"
+                                                    alt=""
+                                                    src="https://cdn.csn365.com/upload/images/7dd418b9baeeb7a67c01c2c154f7fcc9.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('TF', 'TF0001');" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="https://cdn.csn365.com/upload/images/ddf6a1fcbd778de347d53468993337dc.png"
+                                                    alt=""
+                                                    src="https://cdn.csn365.com/upload/images/ddf6a1fcbd778de347d53468993337dc.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('IMES', 'IMES17');" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="https://cdn.csn365.com/upload/images/38dfea73e4919dafcc1c646cb530707c.png"
+                                                    alt=""
+                                                    src="https://cdn.csn365.com/upload/images/38dfea73e4919dafcc1c646cb530707c.png">
+                                            </a>
+                                        </li>
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1335/2-01.png"
+                                                    alt="" src="/web/nato888/storage/1335/2-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1381/Untitled-1-01.png" alt=""
+                                                    src="/web/nato888/storage/1381/Untitled-1-01.png">
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="/gamelobby/slot/all">Nổ Hũ</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/slot/CQ9';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/966/d69da28d-cdb5-4b99-b88e-9e3f3909f193.png"
+                                                    alt=""
+                                                    src="/web/nato888/storage/966/d69da28d-cdb5-4b99-b88e-9e3f3909f193.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/slot/PP';"" class="">
+                                                <img class=" lazyloaded"
+                                                data-src="/web/nato888/storage/936/cb9538a1-04c0-433a-bfe6-b194c7cf861c.png"
+                                                alt=""
+                                                src="/web/nato888/storage/936/cb9538a1-04c0-433a-bfe6-b194c7cf861c.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/slot/JL';" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1276/10-01.png"
+                                                    alt="" src="/web/nato888/storage/1276/10-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/slot/MG';"" class="">
+                                                <img class=" lazyloaded"
+                                                data-src="/web/nato888/storage/178/7b86988c-a22c-44ae-aa11-d60f266718c9.png"
+                                                alt=""
+                                                src="/web/nato888/storage/178/7b86988c-a22c-44ae-aa11-d60f266718c9.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/1150/6-01.png" alt=""
+                                                    src="/web/nato888/storage/1150/6-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1181/7-01.png"
+                                                    alt="" src="/web/nato888/storage/1181/7-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/1211/8-01.png" alt=""
+                                                    src="/web/nato888/storage/1211/8-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/1248/9-01.png" alt=""
+                                                    src="/web/nato888/storage/1248/9-01.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="javascript:;">E-Sport</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);;" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1051/sub-esports-tf.png" alt=""
+                                                    src="/web/nato888/storage/1051/sub-esports-tf.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);;" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1146/1-01.png"
+                                                    alt="" src="/web/nato888/storage/1146/1-01.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> -->
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="javascript:;">Xổ Số</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('TCG_VNLOTT', 'TCG_VNLOTT');" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1678/1-01.png"
+                                                    alt="" src="/web/nato888/storage/1678/1-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx, true');" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1307/4-01.png"
+                                                    alt="" src="/web/nato888/storage/1307/4-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);;" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1313/6-01.png"
+                                                    alt="" src="/web/nato888/storage/1313/6-01.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:;" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1319/5-01.png"
+                                                    alt="" src="/web/nato888/storage/1319/5-01.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="/gamelobby/fish/all">Bắn Cá</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/fish/JL';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1060/sub-mpg-jili.png" alt=""
+                                                    src="/web/nato888/storage/1060/sub-mpg-jili.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/fish/BB';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1060/sub-mpg-jili.png" alt=""
+                                                    src="https://i.imgur.com/LROQjSU.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/fish/JL';" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1360/YL.png"
+                                                    alt="" src="/web/nato888/storage/1360/YL.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/fish/CQ9';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1060/sub-mpg-jili.png" alt=""
+                                                    src="https://i.imgur.com/wmJjraX.png">
+                                            </a>
+                                        </li>
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1367/SG.png"
+                                                    alt="" src="/web/nato888/storage/1367/SG.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1350/BG.png"
+                                                    alt="" src="/web/nato888/storage/1350/BG.png">
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="javascript:;">Đá Gà</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('WS168', 'WS1681');" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="https://cdn.csn365.com/upload/images/d8f67bd1bd5ebfb89bf5d4e748ae25dc.png"
+                                                    alt=""
+                                                    src="https://cdn.csn365.com/upload/images/d8f67bd1bd5ebfb89bf5d4e748ae25dc.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="https://cdn.csn365.com/upload/images/2208509ca0195bd7a6d03aa7e0a0629d.png"
+                                                    alt=""
+                                                    src="https://cdn.csn365.com/upload/images/2208509ca0195bd7a6d03aa7e0a0629d.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="/gamelobby/chess/all">Game Bài</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/chess/JL';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1071/sub-chess-jili.png" alt=""
+                                                    src="/web/nato888/storage/1071/sub-chess-jili.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/chess/KM';" class="">
+                                                <img class=" lazyloaded"
+                                                    data-src="/web/nato888/storage/1089/sub-chess-kingmaker.png" alt=""
+                                                    src="/web/nato888/storage/1089/sub-chess-kingmaker.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:window.location='/gamelobby/chess/LCC';" class="">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="/web/nato888/storage/1683/sub-chess-lc.png" alt=""
+                                                    src="/web/nato888/storage/1683/sub-chess-lc.png">
+                                            </a>
+                                        </li>
+                                        <!-- <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1386/IC.png"
+                                                    alt="" src="/web/nato888/storage/1386/IC.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1412/FG.png"
+                                                    alt="" src="/web/nato888/storage/1412/FG.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="javascript:launchgame('xxx', 'xxx', true);" class="">
+                                                <img class=" lazyloaded" data-src="/web/nato888/storage/1436/BL.png"
+                                                    alt="" src="/web/nato888/storage/1436/BL.png">
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item">
+                                <div class="nav-item">
+                                    <a href="javascript:;">Game Hot</a>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class="sub-menu-item">
+                                            <a href="//game.csn365.com?access_token=<%=dataPage.session.accessToken%>"
+                                                target="_blank" class="">
+                                                <img class="lazyloaded" src="/web/nato888/images/taiXiu.png">
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="//game.csn365.com?access_token=<%=dataPage.session.accessToken%>"
+                                                target="_blank" class="">
+                                                <img class="lazyloaded" src="/web/nato888/images/xocDia.png">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="/promotions">Khuyến mãi</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="/vip-privileges">Vip</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>

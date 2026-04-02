@@ -1,0 +1,260 @@
+<%- include('../../includes/header') %>
+    <div class="container-fluid">
+        <!-- -------------------------------------------------------------- -->
+        <!-- Start Page Content -->
+        <!-- -------------------------------------------------------------- -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="d-flex border-bottom title-part-padding align-items-center">
+                        <div>
+                            <h4 class="card-title mb-0">
+                                <%=dataPage.title%>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="table-container" class="table customize-table table-bordered mb-10 v-middle">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th>Tên Ngân Hàng</th>
+                                        <th>Số Tài Khoản</th>
+                                        <th>Chủ Tài Khoản</th>
+                                        <th>Ảnh QrCode</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Ngày Tạo</th>
+                                        <th class="text-center">Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(dataApi.length> 0) { %>
+
+                                        <% dataApi.forEach((data)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%=data.bankProvide%>
+                                                </td>
+                                                <td>
+                                                    <%=data.bankNumber%>
+                                                </td>
+                                                <td>
+                                                    <%=data.bankName%>
+                                                </td>
+                                                <td>
+                                                    <img style="margin-top: -6px; width: 35px;" src="<%=data.bankQr%>" class="img-fluid user-img">
+                                                </td>
+                                                <td>
+                                                    <%=data.status.toUpperCase()%>
+                                                </td>
+                                                <td>
+                                                    <%= dataPage.helpers.moment(data.createdAt).format("HH:mm DD/MM/YYYY")
+                                                    %>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button style="margin-left: 10px;"
+                                                        onclick="deleteDailyConfirm('<%=data.id%>')" type="button"
+                                                        class="btn waves-effect waves-light btn-danger"><span
+                                                            class="btn-icon-left">
+                                                            <b><i class="fa fa-trash color-dark"></i></b>
+                                                        </span><b>Xóa</b>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="d-flex border-bottom title-part-padding align-items-center">
+                        <div>
+                            <h4 class="card-title mb-0">
+                                Thêm Ngân Hàng
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h6 class="card-subtitle mb-3">
+                            <code>Chỉ thêm khi biết rõ mình đang làm gì!</code>
+                        </h6> -->
+                        <form class="" id="addBankForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success"
+                                    placeholder="Tên Ngân Hàng" id="bankProvide">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="far fa-credit-card"></i> <span
+                                        class="border-start border-success ps-3">Tên Ngân Hàng</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success" placeholder="Số Tài Khoản"
+                                    id="bankNumber">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-keyboard"></i> <span
+                                        class="border-start border-success ps-3">Số Tài Khoản</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control border border-success"
+                                    placeholder="Chủ Tài Khoản" id="bankName">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-user-circle"></i> <span
+                                        class="border-start border-success ps-3">Chủ Tài Khoản</span>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="url" class="form-control border border-success"
+                                    placeholder="Chủ Tài Khoản" id="bankQr">
+                                <label>
+                                    <i style="color: #5ac146 !important" class="fas fa-qrcode"></i> <span
+                                        class="border-start border-success ps-3">Url Mã QrCode</span>
+                                </label>
+                            </div>
+                            <div class="d-md-flex align-items-center">
+                                <div class="mt-3 mt-md-0 ms-auto">
+                                    <button type="submit" class="btn btn-success">
+                                        <div class="d-flex align-items-center">
+                                            Thêm ngân hàng
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- row -->
+        <!-- -------------------------------------------------------------- -->
+        <!-- End PAge Content -->
+        <!-- -------------------------------------------------------------- -->
+    </div>
+    <script>
+        $('#table-container').DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+        });
+        
+        $('#addBankForm').on('submit', (e) => {
+            e.preventDefault();
+
+            const bankProvide = $("input[id=bankProvide]").val();
+            const bankNumber = $("input[id=bankNumber]").val();
+            const bankName = $("input[id=bankName]").val();
+            const bankQrCode = $("input[id=bankQr]").val();
+
+            if (!bankProvide ||
+                !bankNumber ||
+                !bankName ||
+                !bankQrCode) {
+                toastr.error(
+                    "Vui lòng điền đầy đủ thông tin.",
+                    "Error!"
+                );
+                return;
+            }
+
+            cuteAlert({
+                type: "question",
+                title: "Hành Động",
+                message: "Bạn có chắc chắn các thông tin vừa nhập?",
+                confirmText: "Đồng ý",
+                cancelText: "Hủy"
+            }).then((e) => {
+                if (e == 'confirm') {
+                    $.ajax({
+                        "url": `<%=dataPage.config.API_SERVER%>/bankDeposit/create`,
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "data": {
+                            bankProvide,
+                            bankNumber,
+                            bankName,
+                            bankQr: bankQrCode
+                        }
+                    }).then((response) => {
+                        if (response.status) {
+                            toastr.success(
+                                "Thành công.",
+                                "Success!"
+                            );
+                            setTimeout(() => {
+                                window.location = "";
+                            }, 1000);
+                        } else {
+                            toastr.error(
+                                response.msg,
+                                "Error!"
+                            );
+                        }
+                    }).catch((err) => {
+                        console.log(err);
+                        toastr.error(
+                            err.responseJSON.msg,
+                            "Error!"
+                        );
+                    });
+                }
+            });
+
+        });
+
+
+        const deleteDailyConfirm = (id) => {
+            cuteAlert({
+                type: "question",
+                title: "Hành Động",
+                message: "Bạn có muốn xóa nó không?",
+                confirmText: "Đồng ý",
+                cancelText: "Hủy"
+            }).then((e) => {
+                if (e == 'confirm') {
+                    $.ajax({
+                        "url": '<%=dataPage.config.API_SERVER%>/bankDeposit/delete/' + id,
+                        "method": "GET",
+                        "timeout": 0,
+                        "headers": {
+                            "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        },
+                    }).then((response) => {
+                        if (response.status) {
+                            toastr.success(
+                                "Thành công.",
+                                "Success!"
+                            );
+                            setTimeout(() => {
+                                window.location = "";
+                            }, 700);
+                        } else {
+                            toastr.error(
+                                response.msg,
+                                "Error!"
+                            );
+                        }
+                    }).catch((err) => {
+                        console.log(err);
+                        toastr.error(
+                            err.responseJSON.msg,
+                            "Error!"
+                        );
+                    });
+
+                }
+            });
+        }
+    </script>
+    <%- include('../../includes/footer') %>

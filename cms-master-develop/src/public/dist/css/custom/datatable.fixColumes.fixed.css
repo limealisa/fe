@@ -1,0 +1,16 @@
+th.dtfc-fixed-start, .dtfc-fixed-start {
+    background-color: #7460ee;
+    z-index: 1;
+}
+th.dtfc-fixed-end {
+    background-color: #7460ee;
+    z-index: 1;
+}
+td.dtfc-fixed-start {
+    background-color: #ffffff;
+    z-index: 1;
+}
+td.dtfc-fixed-end {
+    background-color: #ffffff;
+    z-index: 1;
+}

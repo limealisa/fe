@@ -1,0 +1,200 @@
+<%- include('../../includes/header') %>
+    <link rel="stylesheet" type="text/css" href="/web/static/stylesheets/d-Game.f1658510.css">
+
+    <style>
+        .u-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .c-carousel {
+            position: relative;
+            width: 100%;
+        }
+
+        .c-carousel__wrapper.swiper {
+            /* margin: 0 48px; */
+            position: static;
+        }
+
+        .c-carousel__inner-wrapper.swiper-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .c-carousel img {
+            margin: 0 auto;
+        }
+
+        .c-carousel__controls {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .c-carousel__button--next,
+        .c-carousel__button--prev {
+            cursor: pointer;
+        }
+
+        .c-carousel__button--prev.swiper-button-disabled,
+        .c-carousel__button--next.swiper-button-disabled {
+            opacity: 0.35;
+            cursor: auto;
+            pointer-events: none;
+        }
+
+        .c-carousel__item.swiper-slide {
+            max-width: 300px;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .btnPrevNew {
+            margin-left: -35px;
+            background-color: #FFF;
+            border-radius: 10px;
+        }
+
+        .btnNextNew {
+            margin-right: -35px;
+            background-color: #FFF;
+            border-radius: 10px;
+        }
+    </style>
+    <div class="app gamelobby egame">
+        <div class="app-body">
+            <div class="egame-container PG">
+                <div class="egame-banner">
+                    <img alt="" src="/web/static/img/csn365/icon-bg-casino.webp" class="banner-mask"
+                        style="position: relative;">
+                    <div class="egame-box">
+                        <div class="egame-Text">
+                            <h2 class="textH2">
+                                <%=dataPage.title;%>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="egame-main">
+                    <div class="egame-tab">
+                        <div class="egame-providers">
+
+                            <div class="u-wrapper">
+                                <div class="c-carousel">
+                                    <div class="c-carousel__wrapper swiper">
+                                        <div class="c-carousel__inner-wrapper swiper-wrapper">
+
+                                            <% if(dataProduct.length> 0) { %>
+                                                <% dataProduct.forEach((data)=> { %>
+
+                                                    <div class="c-carousel__item swiper-slide">
+                                                        <div class="egame-gplogo <%=(location == data.product_code) ? 'active': ''%>"
+                                                            onclick="window.location='/gamelobby/live/<%=data.product_code;%>'">
+                                                            <div class="pd-logo"
+                                                                style="background-image: url(&quot;https://csi.20icipp.com/img/static/gplogo/icon-dark/ae_gaming.png&quot;);">
+                                                            </div>
+                                                            <span><%=data.product_code;%></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <% }); %>
+                                            <% } %>
+
+                                        </div>
+                                    </div>
+                                    <div class="c-carousel__controls" style="--swiper-navigation-color: pink;">
+                                        <div class="c-carousel__button--prev btnPrevNew">
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                                stroke-width="2" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" class="css-i6dzq1">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 8 8 12 12 16"></polyline>
+                                                <line x1="16" y1="12" x2="8" y2="12"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="c-carousel__button--next btnNextNew"><svg viewBox="0 0 24 24"
+                                                width="24" height="24" stroke="currentColor" stroke-width="2"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                class="css-i6dzq1">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 16 16 12 12 8"></polyline>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="egame-tags scroll">
+                            <div class="all active">
+                                <%=dataPage.title%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="egame-content">
+                        <div class="egame-tools"></div>
+                        <div class="easein-enter-done">
+                            <ul class="egame-games">
+                                <% if(dataApi.data.games.length> 0) { %>
+                                    <% dataApi.data.games.forEach((data)=> { %>
+
+                                        <li class="game-item" data-pop=pop>
+                                            <div class="img">
+                                                <img style="object-fit: cover" src="<%=data.game_icon%>" class="cover"
+                                                    style="height: 200px;border-radius: 24px;">
+                                            </div>
+                                            <div class="title">
+                                                <%=data.game_name%>
+                                            </div>
+                                            <div class="link-cover">
+                                                <button class="nrc-button launch-game"
+                                                    onclick="launchgame(`<%=data.product_code%>`, `<%=data.game_code%>`)">Chơi
+                                                    Ngay</button>
+                                            </div>
+                                        </li>
+                                        <% }); %>
+                                            <% } %>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Following imports only used with bundlers!
+        // import Swiper from "swiper";
+        // import { Navigation, A11y } from 'swiper/modules';
+        // import 'swiper/css';
+
+        const swiper = new Swiper('.swiper', {
+            // modules: [Navigation, A11y],
+            direction: 'horizontal',
+            loop: false,
+            navigation: {
+                nextEl: '.c-carousel__button--next',
+                prevEl: '.c-carousel__button--prev',
+            },
+            slidesPerView: 'auto',
+            spaceBetween: 48,
+            a11y: {
+                prevSlideMessage: 'Previous slide',
+                nextSlideMessage: 'Next slide',
+            },
+        });
+
+    </script>
+    <%- include('../../includes/footer') %>

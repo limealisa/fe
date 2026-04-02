@@ -1,0 +1,81 @@
+div.dataTables_scrollBody table {
+    border-top: none;
+    margin-top: -4px !important;
+    margin-bottom: 0 !important;
+}
+
+.dt-button-collection .dt-button.buttons-columnVisibility {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0.25em 1em !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+.dt-button-collection .buttons-columnVisibility:before,
+.dt-button-collection .buttons-columnVisibility.active span:before {
+    display:block;
+    position:absolute;
+    top:1.2em;
+    left:0;
+    width:12px;
+    height:12px;
+    box-sizing:border-box;
+}
+.dt-button-collection .buttons-columnVisibility:before {
+    content:' ';
+    margin-top:-8px;
+    margin-left:10px;
+    border:1px solid rgb(255, 255, 255);
+    border-radius:3px;
+}
+.dt-button-collection .buttons-columnVisibility.active span:before {
+    font-family: 'Arial' !important;
+    content:'\2714';
+    margin-top: -15px;
+    margin-left: 12px;
+    text-align: center;
+    text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+.dt-button-collection .buttons-columnVisibility span {
+    margin-left:17px;    
+}
+div.dt-buttons > .dt-button, div.dt-buttons > div.dt-button-split .dt-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 0.167em;
+    margin-right: 0.167em;
+    margin-bottom: 0.333em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.88em;
+    line-height: 1.6em;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #137eff;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr="rgba(230, 230, 230, 0.1)", EndColorStr="rgba(0, 0, 0, 0.1)");
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    text-overflow: ellipsis;
+}
+div.dt-buttons > .dt-button:hover:not(.disabled), div.dt-buttons > div.dt-button-split .dt-button:hover:not(.disabled) {
+    background: #489bff;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr="rgba(153, 153, 153, 0.1)", EndColorStr="rgba(0, 0, 0, 0.1)");
+}
+
+div.dt-buttons > .dt-button, div.dt-buttons > div.dt-button-split .dt-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 0.167em;
+    margin-right: 0.167em;
+    margin-bottom: 0.333em;
+    padding: 0.5em 1em;
+    border: 1px solid rgb(109 109 109 / 30%);
+}

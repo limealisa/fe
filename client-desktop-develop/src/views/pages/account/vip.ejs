@@ -1,0 +1,649 @@
+<%- include('../../includes/header') %>
+
+    <style>
+        .vip-display {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .vip-display .vip-level {
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+            height: 100%;
+            padding: 10px;
+            position: relative;
+            width: 67%;
+            /* background: linear-gradient(135deg, rgb(120, 120, 120), rgb(120, 120, 120) 50%, rgb(135, 135, 135) 0px, rgb(120, 120, 120));
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 3px 0px, rgb(100, 100, 100) 0px -10px 25px inset; */
+            /* top: 30px; */
+        }
+
+        .vip-display .vip-level .info-display {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .vip-display .vip-level .info-display .top-box div {
+            padding: 3px;
+            font-size: 11px;
+            line-height: 1;
+        }
+
+        .vip-display .vip-level .info-display .top-box .level {
+            font-size: 24px;
+            font-weight: 800;
+            text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 0px;
+        }
+
+        .vip-display .vip-level .info-display .top-box div {
+            padding: 3px;
+            font-size: 11px;
+            line-height: 1;
+        }
+
+        .vip-display .vip-level .info-display .top-box p {
+            font-size: 16px;
+            font-weight: 400;
+            overflow: hidden;
+            text-transform: uppercase;
+            padding: 3px;
+            padding-top: 0px;
+            text-overflow: ellipsis;
+            text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 0px;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .vip-display .vip-link {
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            width: 30%;
+        }
+
+        .vip-display .vip-link a {
+            color: #454545 !important;
+        }
+
+        .vip-display .vip-link a div {
+            font-weight: 400;
+            position: absolute;
+            text-align: center;
+            top: 25%;
+            width: 100%;
+        }
+
+        .vip-display .vip-link a img {
+            height: 105%;
+            width: 121%;
+        }
+
+        .vip-condition {
+            margin-top: 15px;
+        }
+
+        .vip-condition .detail-card {
+            margin: 10px 0px 0px;
+            border-radius: 5px;
+            line-height: 1;
+            overflow: hidden;
+        }
+
+        .vip-condition .detail-card .card-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+            padding: 15px;
+            font-weight: 400;
+        }
+
+        .vip-condition .detail-card .card-content div {
+            font-size: 16px;
+        }
+
+        .vip-condition .detail-card .card-content div:last-child {
+            border: 1px solid rgb(233, 73, 81);
+            color: rgb(233, 73, 81);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 300;
+            margin-left: 5px;
+            padding: 4px 7px;
+            white-space: nowrap;
+        }
+
+        .vip-condition .detail-card .card-detail {
+            padding: 10px 20px;
+            background-color: rgb(255, 255, 255);
+            border-top: 1px solid rgb(233, 233, 233);
+            cursor: pointer;
+        }
+
+        .vip-condition .detail-card .card-detail>div {
+            padding: 3px 0px;
+        }
+
+        .vip-condition .detail-card .card-detail>div .title {
+            color: rgb(146, 146, 146);
+            font-size: 14px;
+            padding: 5px 0px;
+        }
+
+        .vip-condition .detail-card .card-detail>div .point {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 5px 0px;
+        }
+
+        .vip-privilege {
+            margin: 30px 0px;
+        }
+
+        .vip-privilege .title {
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 24px;
+            margin-bottom: 20px;
+        }
+
+        .vip-privilege .box {
+            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .vip-privilege-item {
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .vip-privilege .vip-privilege-item img {
+            max-width: 64px;
+        }
+
+        .vip-privilege .vip-privilege-item .item-title {
+            font-weight: 400;
+            line-height: 22px;
+            margin: 8px 0px;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        .vip-privilege .vip-privilege-item button {
+            opacity: 0.5;
+            border: none;
+            background-color: #403e0b;
+            width: 100%;
+            border-radius: 3px;
+            color: rgb(255, 255, 255);
+            font-size: 12px;
+            height: inherit;
+            padding: 3px 15px;
+        }
+
+
+        .vip-card {
+            width: 650px;
+            height: 311px;
+        }
+
+        .vip-level-0 {
+            background-image: url("/web/images/vip/card/vip0.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-1 {
+            background-image: url("/web/images/vip/card/vip1.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-2 {
+            background-image: url("/web/images/vip/card/vip2.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-3 {
+            background-image: url("/web/images/vip/card/vip3.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-4 {
+            background-image: url("/web/images/vip/card/vip4.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-5 {
+            background-image: url("/web/images/vip/card/vip5.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-6 {
+            background-image: url("/web/images/vip/card/vip6.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-7 {
+            background-image: url("/web/images/vip/card/vip7.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-7 {
+            background-image: url("/web/images/vip/card/vip7.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-8 {
+            background-image: url("/web/images/vip/card/vip8.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-9 {
+            background-image: url("/web/images/vip/card/vip9.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .vip-level-10 {
+            background-image: url("/web/images/vip/card/vip10.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+        }
+
+        .level-txt {
+            position: absolute;
+            top: 63px;
+            left: 28px;
+            width: 85%;
+            color: #fff;
+            font-weight: bold;
+            font-size: 56px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+        .shake-anim {
+            /* Start the shake animation and make the animation last for 0.5 seconds */
+            animation: shake 0.5s;
+
+            /* When the animation is finished, start again */
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+    </style>
+
+
+    <div id="body-web-info-vip">
+        <div class="wrap-info">
+            <div class="info-container">
+
+                <!-- SIDEBAR MENU -->
+                <%- include('./sidebar') %>
+                    <!-- END SIDEBAR MENU -->
+
+                    <div class="right">
+                        <div class="main-content">
+                            <div class="title">Cấp độ VIP</div>
+                            <div class="vip-display" id="vip-level">
+                                <div class="vip-level">
+                                    <div class="info-display" class="info-display">
+                                        <div class="top-box">
+                                            <div class="">Cấp độ hiện tại</div>
+                                            <div class="level"></div>
+                                        </div>
+                                        <div class="bottom-box"></div>
+                                    </div>
+                                    <!-- <div class="badge-image">
+                                        <img id="armorial" class=" ls-is-cached lazyloaded"
+                                            data-src="https://i.stack.imgur.com/kOnzy.gif" alt="Vip User"
+                                            src="https://i.stack.imgur.com/kOnzy.gif">
+                                    </div> -->
+                                </div>
+                                <div class="vip-link">
+                                    <a href="/vip-privileges">
+                                        <div class="">Xem đặc quyền</div>
+                                        <img class=" ls-is-cached lazyloaded"
+                                            data-src="/web/nato888/web/Images/privilege_bg.png" alt=""
+                                            src="/web/nato888/web/Images/privilege_bg.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="vip-condition">
+                                <div class="detail-card">
+                                    <div class="card-content">
+                                        <div class="content-codition"><b id="next_vip_level">Điều kiện thăng cấp lên
+                                            </b>
+                                        </div>
+                                        <div class="msg-btn">Chưa đủ điều kiện</div>
+                                    </div>
+                                    <div class="card-detail">
+                                        <div class="">
+                                            <div class="title">Tích lũy nạp yêu cầu (VND):</div>
+                                            <div class="point">
+                                                <div class="current-point">
+                                                    <span id="total_deposit" style="color:rgb(154, 193, 67)">0</span> /
+                                                    <span id="deposit_require" style="color:rgb(255, 21, 21)">0</span>
+                                                </div>
+                                                <div class="codition-point"></div>
+                                            </div>
+                                            <div class="title">Cược hợp lệ yêu cầu (Điểm):</div>
+                                            <div class="point">
+                                                <div class="current-valid-bet">
+                                                    <span id="total_validbet" style="color:rgb(154, 193, 67)">0</span> /
+                                                    <span id="validbet_require" style="color:rgb(255, 21, 21)">0</span>
+                                                </div>
+                                                <div class="codition-valid-bet"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vip-privilege">
+                                <div class="title">
+                                    Đặc quyền riêng của bạn
+                                </div>
+                                <div class="box"
+                                    style="background-color: #ededed;border: none;display: flex;justify-content: center;">
+                                    <div class="vip-privilege-item">
+                                        <img class=" ls-is-cached lazyloaded"
+                                            data-src="/web/images/vip/privileg_upgrade/privileg_upgrade.png" alt=""
+                                            src="/web/images/vip/privileg_upgrade/privileg_upgrade.png">
+                                        <div class="item-title">
+                                            Quà thăng cấp
+                                        </div>
+                                        <button id="coin-reward">Không có</button>
+                                    </div>
+                                    <div class="vip-privilege-item" style="    width: 141px;">
+                                        <img class=" ls-is-cached lazyloaded"
+                                            data-src="/web/images/vip/privileg_upgrade/privileg_envelope.png" alt=""
+                                            src="/web/images/vip/privileg_upgrade/privileg_envelope.png">
+                                        <div class="item-title">
+                                            Bonus tháng
+                                        </div>
+                                        <button id="coin-monthly">Không có</button>
+                                    </div>
+                                    <!-- <div class="vip-privilege-item">
+                                    <img class=" ls-is-cached lazyloaded"
+                                        data-src="/web/images/vip/privileg_upgrade/privileg_relief_fund.png" alt=""
+                                        src="/web/images/vip/privileg_upgrade/privileg_relief_fund.png">
+                                    <div class="item-title">
+                                        Bonus cứu trợ
+                                    </div>
+                                    <button>Không có</button>
+                                </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="sub-content">
+                            <ul class="nav nav-tabs" style="margin-top: 28px;">
+                                <li class="active" style="text-align: left;"><a data-toggle="tab" href="#home">Lịch sử
+                                        thăng cấp</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="home" style="max-height: 58vh;" class="tab-pane fade in active show">
+                                    <div class="history-sreach">
+                                        <div class="input-field">
+                                            <div class="">
+                                                <div class="input-block">
+                                                    <label for="">Thời gian từ</label>
+                                                    <input type="text" name="timeStart" id="timeStart"
+                                                        class="timeStart flatpickr-input" value="2023-01-27"
+                                                        readonly="readonly">
+                                                </div>
+                                                <div class="icon-celander">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-field">
+                                            <div class="">
+                                                <div class="input-block">
+                                                    <label for="">Thời gian kết thúc</label>
+                                                    <input type="text" name="timeEnd" id="timeEnd"
+                                                        class="timeEnd flatpickr-input" value="2023-02-03"
+                                                        readonly="readonly">
+                                                </div>
+                                                <div class="icon-celander">
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="search-history" data-type="vip">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
+                                    <!-- <div id="list-mess">
+                                        <div class="infinite-loader-wrapper">
+                                            <div class="infinite-load-item">
+                                                <img class=" ls-is-cached lazyloaded"
+                                                    data-src="http://nani88.com/web/Images/vip/loader.svg" alt=""
+                                                    src="http://nani88.com/web/Images/vip/loader.svg">
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        let vipConfig = {};
+        $(document).ready(() => {
+            initVip();
+        });
+
+        function initVip() {
+            getVipConfig().then((res) => {
+                if (res.status) {
+                    vipConfig = res.data;
+                    getVipUser();
+                }
+            });
+        }
+
+        function getVipConfig() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `<%=dataPage.config.MAIN_API%>/api/vip/get-vip-config`,
+                    headers: {},
+                    type: "GET",
+                    dataType: "json",
+                    success: (result) => {
+
+                        resolve(result);
+                    },
+                    error: (error) => {
+                        reject(error);
+                    }
+                });
+            });
+        }
+
+        function getReward(vipLevel) {
+            $(".msg-btn").hide();
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `<%=dataPage.config.MAIN_API%>/api/vip/get-vip-reward`,
+                    headers: {},
+                    type: "POST",
+                    timeout: 0,
+                    headers: {
+                        "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                        "Content-Type": "application/json",
+                    },
+                    dataType: "json",
+                    data: JSON.stringify({
+                        vip: vipLevel
+                    }),
+                    success: (result) => {
+                        $(".msg-btn").show();
+                        if (result.status) {
+                            initVip();
+                        }
+                        return toastr.success(
+                            result.msg,
+                            "Thành công!"
+                        );
+                        resolve(result);
+                    },
+                    error: (error) => {
+                        reject(error);
+                    }
+                });
+            });
+        }
+
+        const getVipUser = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/vip",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+            }).done((response) => {
+                if (response.status) {
+                    const VipData = response.data;
+
+                    if (VipData.vip_current == 0) {
+                        $("#vip-level").addClass("vip-level-0");
+                    } else {
+                        if (VipData.vip_current > 10) {
+                            $("#vip-level").addClass("vip-level-10");
+                        } else {
+                            $("#vip-level").addClass("vip-level-" + VipData.vip_current);
+                        }
+                    }
+
+                    $("#coin-reward").html(numberWithCommas(VipData.coin_reward));
+                    $("#coin-monthly").html(numberWithCommas(VipData.coin_monthly));
+
+                    let totalDeposit = VipData.total_deposit;
+                    let totalValidBet = VipData.total_validBet;
+
+                    $(".level").html(`VIP ${VipData.vip_current}`);
+                    $("#next_vip_level").html(`Điều kiện lên VIP ${VipData.vip_current + 1}`);
+                    $("#total_deposit").html(numberWithCommas(totalDeposit));
+                    $("#total_validbet").html(numberWithCommas(totalValidBet));
+                    $("#deposit_require").html(numberWithCommas(vipConfig["vip" + (VipData.vip_current + 1)].deposit_require));
+                    $("#validbet_require").html(numberWithCommas(vipConfig["vip" + (VipData.vip_current + 1)].valid_bet_require));
+
+                    // $(".codition-point").html(`Còn thiếu ${numberWithCommas(vipConfig["vip" + VipData.vip_current + 1].deposit_require - VipData.total_deposit)}`)
+                    $(".bottom-box").html(`
+                        <p style="margin-top:5px;font-size:15px;">Thưởng thăng cấp = ${numberWithCommas(vipConfig["vip" + (VipData.vip_current + 1)].coin_reward)}</p> 
+                        <p style="margin-top:5px;font-size:15px;">Thưởng tháng = ${numberWithCommas(vipConfig["vip" + (VipData.vip_current + 1)].coin_monthly)}</p> 
+                        `);
+                    // $(".prog-2").css("width", (totalDeposit / VipData.next_vip_deposit_require) * 100 + "%");
+
+                    // nhận thưởng
+                    if (
+                        totalDeposit >= vipConfig["vip" + (VipData.vip_current + 1)].deposit_require
+                        &&
+                        totalValidBet >= vipConfig["vip" + (VipData.vip_current + 1)].valid_bet_require
+                    ) {
+                        $(".msg-btn").attr("style", "color: rgb(24 190 57);border: 1px solid rgb(24 190 57);cursor: pointer;");
+                        $(".msg-btn").html(`Nhận thưởng & Thăng cấp`);
+                        $(".msg-btn").addClass("shake-anim");
+                        $(".msg-btn").attr("onClick", `getReward(${VipData.vip_current + 1})`);
+                    }
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+    </script>
+
+    <%- include('../../includes/footer') %>

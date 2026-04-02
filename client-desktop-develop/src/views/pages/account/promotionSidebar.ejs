@@ -1,0 +1,40 @@
+<style>
+#body-web-info .wrap-info .info-container .right .sub-content .ads-block .promo-container .promo-item h3 {
+    margin: 0;
+    color: #454545;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19px;
+    padding: 8px 11px;
+    /* word-break: break-all; */
+}
+</style>
+<script>
+    const getPromotionData = () => {
+        $.ajax({
+            "url": "<%=dataPage.config.MAIN_API%>/api/promotion",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }).done(function (response) {
+            if (response.status) {
+                response.data.forEach(promotion => {
+                    $(".promo-container").append(`
+                    <a href="/promotions" class="promo-item" style="min-height: 140px;">
+                        <img class=" ls-is-cached lazyloaded" data-src="${promotion.thumbnail}" alt="" src="${promotion.thumbnail}" alt="${promotion.title}">
+                        <h3 style="font-size: 15px;" class="text-uppercase">${promotion.title}</h3>
+                    </a>
+                `);
+                });
+            } else {
+                alert(response.msg);
+            }
+        });
+    }
+
+    $(document).ready(() => {
+        getPromotionData();
+    });    
+</script>

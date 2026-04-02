@@ -1,0 +1,1245 @@
+<%- include('includes/header') %>
+<%- include('includes/popup.ejs');%>
+
+    <style>
+        .home-content {
+            /* background: url(http://nani88.com/images/bg.png) no-repeat top; */
+        }
+
+        .container {
+            width: unset;
+            padding: 0px;
+        }
+
+        .home-game .items_box li:hover a {
+            color: #fff !important;
+            background-image: linear-gradient(0deg,
+                    #aecfff,
+                    rgba(171, 205, 255, 0.75) 16%,
+                    rgba(167, 203, 255, 0.5) 33%,
+                    rgba(171, 206, 255, 0.75) 66%,
+                    #afd0ff),
+                linear-gradient(#005eba, #005eba) !important;
+        }
+
+        .login_content .username_login form .form_item input[data-v-6bfc405e]::placeholder {
+            color: #4e5054;
+            font-size: 15px;
+            padding-left: 5px;
+        }
+    </style>
+
+
+    <div id="app">
+        <div data-v-337ba735="" class="br_main">
+            <div data-v-337ba735="" class="br_index_main">
+                <div data-v-337ba735="" class="banner_notice" style="height: 80%;display: none;">
+                    <div data-v-7436cc99="" data-v-337ba735="" class="br_carousel_main">
+
+                        <div data-v-7436cc99="" class="game-banner-cambo">
+                            <div
+                                class="swiper mySwiperBanner swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                                <div class="swiper-wrapper" id="swiper-wrapper-57589196c97db227" aria-live="off"
+                                    style="transform: translate3d(-4182px, 0px, 0px); transition-duration: 0ms;">
+                                    <% let bannerList = dataPage.helpers.shuffle(dataPage.session.siteConfig.site_banner); %>
+                                    <% bannerList.forEach((item)=> { %>
+                                        <div class="swiper-slide" role="group" aria-label="1 / 5"
+                                            style="width: 1394px;">
+                                            <a href="javascript:window.location='<%= item.permalink %>';">
+                                                <img data-src="<%= item.image_url %>"
+                                                    class="slide-img ls-is-cached lazyloaded"
+                                                    style="cursor: pointer;width: 100%;" src="<%= item.image_url %>">
+                                            </a>
+                                        </div>
+                                        <% }); %>
+                                </div>
+
+
+                                <div
+                                    class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                    <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                                        aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet"
+                                        tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                        class="swiper-pagination-bullet" tabindex="0" role="button"
+                                        aria-label="Go to slide 3"></span><span
+                                        class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
+                                        role="button" aria-label="Go to slide 4" aria-current="true"></span><span
+                                        class="swiper-pagination-bullet" tabindex="0" role="button"
+                                        aria-label="Go to slide 5"></span>
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="body-web-promotion" style="background: #7f7f7ff5;">
+                        <div class="marquee-block">
+                            <marquee class="visible-area">
+                                <%=dataPage.session.siteConfig.site_brand_marquee;%>
+                            </marquee>
+                            <div class="icon-title">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div data-v-337ba735="" class="notice-content">
+                        <div data-v-dafa49f0="" data-v-337ba735="" class="index_notice">
+                            <div data-v-dafa49f0="" class="notice_main width_1200">
+                                <img src="https://i.imgur.com/mKMiVe5.png" alt="" class="notice-icon"
+                                    style="width: 22px; margin-right: 10px;">
+                                <div data-v-dafa49f0="" class="seamless-warp2">
+                                    <div
+                                        style="transform: translate(-33px, 0px); transition: all 0ms ease-in 0s; overflow: hidden; ">
+                                        <marquee behavior="" direction="" style="font-size:14px;">
+                                            <%=dataPage.session.siteConfig.site_brand_marquee;%>
+                                        </marquee>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div data-v-337ba735="" class="home-content">
+                    <div data-v-44f03a1d="" data-v-337ba735="" class="game-content"
+                        style="width: 85%; margin:0 auto;max-width: 1200px;">
+                        <div data-v-4c7406bb="" data-v-44f03a1d="" class="recommend-wrap">
+                            <div data-v-4c7406bb="" class="special-title">TRÒ CHƠI ĐẶC SẮC</div>
+                            <div data-v-4c7406bb=""
+                                class="swiper-container swiper swiper-container-initialized swiper-container-horizontal"
+                                style="height: 18%;">
+                                <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+                                    <div data-v-4c7406bb="" class="swiper-slide swiper-slide-active"
+                                        style="width: 390px; margin-right: 15px;"
+                                        onclick="launchgame('GPI', 'GPI144');">
+                                        <img data-v-4c7406bb="" data-type="LK" data-code="G8" data-id="40"
+                                            src="/web/nato888/gi8_assets/images/outstanding_1.png" alt=""
+                                            class="recomend-item">
+                                    </div>
+                                    <div data-v-4c7406bb="" class="swiper-slide swiper-slide-next"
+                                        style="width: 390px; margin-right: 15px;"
+                                        onclick="launchgame('WS168', 'WS1681')">
+                                        <img data-v-4c7406bb="" data-type="OT" data-code="DM" data-id="51"
+                                            src="/web/nato888/gi8_assets/images/outstanding_2.png" alt=""
+                                            class="recomend-item">
+                                    </div>
+                                    <div data-v-4c7406bb="" class="swiper-slide"
+                                        style="width: 390px; margin-right: 15px;" onclick="launchgame('DG', 'DG0013')">
+                                        <img data-v-4c7406bb="" data-type="LC" data-code="WC" data-id="16"
+                                            src="/web/nato888/gi8_assets/images/outstanding_3.png" alt=""
+                                            class="recomend-item">
+                                    </div>
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                            </div>
+                        </div>
+                        <div data-v-44f03a1d="" class="home-games">
+                            <div data-v-5e2cd1c6="" data-v-44f03a1d="" class="home-game SPORTS">
+                                <div data-v-5e2cd1c6="" class="container SPORTS">
+                                    <ul data-v-5e2cd1c6="" class="items_box SPORTS length4">
+                                        <li data-v-5e2cd1c6="">
+                                            <a href="javascript:launchgame('SBO', 'SBO041');" style="color:#da4326"
+                                                data-v-5e2cd1c6="" class="ball-item" data-code="IB" data-type="SB"
+                                                data-id="53">
+                                                <p data-v-5e2cd1c6="">
+                                                    SBO
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a href="javascript:launchgame('UG', 'UG2001');" style="color:#da4326"
+                                                data-v-5e2cd1c6="" class="ball-item" data-code="SO" data-type="SB"
+                                                data-id="18">
+                                                <p data-v-5e2cd1c6="">
+                                                    UG
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a href="javascript:launchgame('CMD', 'CMD001');" style="color:#da4326"
+                                                data-v-5e2cd1c6="" class="ball-item" data-code="CM" data-type="SB"
+                                                data-id="19">
+                                                <p data-v-5e2cd1c6="">
+                                                    CMD
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a href="javascript:launchgame('IMES', 'IMES17');" style="color:#da4326"
+                                                data-v-5e2cd1c6="" class="ball-item" data-code="SB" data-type="SB"
+                                                data-id="20">
+                                                <p data-v-5e2cd1c6="">
+                                                    IMES
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div data-v-5e2cd1c6="" class="type_name">
+                                    <div data-v-5e2cd1c6="" class="desc SPORTS">
+                                        <p data-v-5e2cd1c6="">Thể thao</p>
+                                        <a href="javascript:;" data-v-5e2cd1c6="" style="color: #fff"
+                                            class="choose"><span data-v-5e2cd1c6="" class="icon"></span>
+                                            <span data-v-5e2cd1c6="">Chọn menu</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-5e2cd1c6="" data-v-44f03a1d="" class="home-game PVP">
+                                <div data-v-5e2cd1c6="" class="container PVP">
+                                    <ul data-v-5e2cd1c6="" class="items_box PVP length4">
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6=""
+                                                href="javascript:window.location='/gamelobby/chess/JL';"
+                                                style="color:#c36e00" class="ball-item" data-code="JL" data-type="PK"
+                                                data-id="29">
+                                                <p data-v-5e2cd1c6="">
+                                                    JL
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:window.location='/gamelobby/chess/JDB';"
+                                                style="color:#c36e00" class="ball-item" data-code="RE" data-type="SL"
+                                                data-id="30">
+                                                <p data-v-5e2cd1c6="">
+                                                    JDB
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:window.location='/gamelobby/chess/KM';"
+                                                style="color:#c36e00" class="ball-item" data-code="IC" data-type="SL"
+                                                data-id="55">
+                                                <p data-v-5e2cd1c6="">
+                                                    KM
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame('xxx', 'xxx', true);"
+                                                style="color:#c36e00" class="ball-item" data-code="FG" data-type="PK"
+                                                data-id="56">
+                                                <p data-v-5e2cd1c6="">
+                                                    FG
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <div data-v-5e2cd1c6="" class="type_name">
+                                    <div data-v-5e2cd1c6="" class="desc PVP">
+                                        <p data-v-5e2cd1c6="">Game bài</p>
+                                        <a data-v-5e2cd1c6="" href="javascript:;" style="color:#fff"
+                                            class="choose"><span data-v-5e2cd1c6="" class="icon"></span> <span
+                                                data-v-5e2cd1c6="">Chọn menu</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-5e2cd1c6="" data-v-44f03a1d="" class="home-game FISH">
+                                <div data-v-5e2cd1c6="" class="container FISH">
+                                    <ul data-v-5e2cd1c6="" class="items_box FISH length4">
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6=""
+                                                href="javascript:window.location='/gamelobby/fish/CQ9';"
+                                                style="color:#1167d0" class="ball-item" data-code="SG" data-type="FH"
+                                                data-id="50">
+                                                <p data-v-5e2cd1c6="">
+                                                    CQ9
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6=""
+                                                href="javascript:window.location='/gamelobby/fish/BB';"
+                                                style="color:#1167d0" class="ball-item" data-code="BI" data-type="FH"
+                                                data-id="48">
+                                                <p data-v-5e2cd1c6="">
+                                                    BB
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6=""
+                                                href="javascript:window.location='/gamelobby/fish/JL';"
+                                                style="color:#1167d0" class="ball-item" data-code="JL" data-type="FH"
+                                                data-id="28">
+                                                <p data-v-5e2cd1c6="">
+                                                    JL
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:window.location='/gamelobby/fish/JDB';"
+                                                style="color:#1167d0" class="ball-item" data-code="YL" data-type="FH"
+                                                data-id="49">
+                                                <p data-v-5e2cd1c6="">
+                                                    JDB
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward">
+                                                    <img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div data-v-5e2cd1c6="" class="type_name">
+                                    <div data-v-5e2cd1c6="" class="desc FISH">
+                                        <p data-v-5e2cd1c6="">Bắn cá</p>
+                                        <a data-v-5e2cd1c6="" href="javascript:;" style="color: #fff"
+                                            class="choose"><span data-v-5e2cd1c6="" class="icon"></span> <span
+                                                data-v-5e2cd1c6="">Chọn menu</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-44f03a1d="" class="slots_live">
+                            <div data-v-5fd1e346="" data-v-44f03a1d="" class="slots_contaniner">
+                                <ul class="nav nav-tabs rng_menu" style="display: flex; flex-wrap: wrap;" id="slots_contaniner_list_product">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#playson"> <img data-v-5fd1e346=""
+                                                data-src="/web/nato888/storage/938/PL-01.png"
+                                                class=" ls-is-cached lazyloaded" alt=""
+                                                src="/web/nato888/storage/938/PL-01.png">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#cq9"> <img data-v-5fd1e346=""
+                                                data-src="/web/nato888//storage/968/cq9.png"
+                                                class=" ls-is-cached lazyloaded" alt=""
+                                                src="/web/nato888//storage/968/cq9.png">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#mg"> <img data-v-5fd1e346=""
+                                                data-src="/web/nato888/storage/180/mg.png"
+                                                class=" ls-is-cached lazyloaded" alt=""
+                                                src="/web/nato888/storage/180/mg.png">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#live22"> <img data-v-5fd1e346=""
+                                                data-src="/web/nato888/storage/1152/1-01.png"
+                                                class=" ls-is-cached lazyloaded" alt=""
+                                                src="/web/nato888/storage/1152/1-01.png">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#quickspin"> <img data-v-5fd1e346=""
+                                                data-src="/web/nato888/storage/1183/2-01.png" class=" lazyloaded" alt=""
+                                                src="/web/nato888/storage/1183/2-01.png">
+                                        </a>
+                                    </li>
+
+
+                                    <div data-v-5fd1e346="" class="more" style="width: 100%;">
+                                        <a href="/gamelobby/slot/all">
+                                            <p data-v-5fd1e346="">Xem thêm»</p> <span data-v-5fd1e346=""></span>
+                                        </a>
+                                    </div>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="playson" class="tab-pane fade  in active show ">
+                                        <ul class="lists">
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/940/5868.png"
+                                                        src="/web/nato888/storage/940/5868.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/941/5855.png"
+                                                        src="/web/nato888/storage/941/5855.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/942/5845.png"
+                                                        src="/web/nato888/storage/942/5845.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/943/5833.png"
+                                                        src="/web/nato888/storage/943/5833.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/944/5815.png"
+                                                        src="/web/nato888/storage/944/5815.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/945/5805.png"
+                                                        src="/web/nato888/storage/945/5805.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/946/5799.png"
+                                                        src="/web/nato888/storage/946/5799.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/947/5791.png"
+                                                        src="/web/nato888/storage/947/5791.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/948/5893.png"
+                                                        src="/web/nato888/storage/948/5893.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="22"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="cq9" class="tab-pane fade ">
+                                        <ul class="lists">
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/970/7.png"
+                                                        src="/web/nato888/storage/970/7.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/971/10.png"
+                                                        src="/web/nato888/storage/971/10.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/972/20.png"
+                                                        src="/web/nato888/storage/972/20.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/973/26.png"
+                                                        src="/web/nato888/storage/973/26.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/974/31.png"
+                                                        src="/web/nato888/storage/974/31.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/975/38.png"
+                                                        src="/web/nato888/storage/975/38.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/976/39.png"
+                                                        src="/web/nato888/storage/976/39.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/977/50.png"
+                                                        src="/web/nato888/storage/977/50.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/978/52.png"
+                                                        src="/web/nato888/storage/978/52.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/979/64.png"
+                                                        src="/web/nato888/storage/979/64.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="CQ" data-type="SL" data-id="23"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="mg" class="tab-pane fade ">
+                                        <ul class="lists">
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1010/smg_4diamondblues.png"
+                                                        src="/web/nato888/storage/1010/smg_4diamondblues.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1011/smg_5reeldrive.png"
+                                                        src="/web/nato888/storage/1011/smg_5reeldrive.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1012/smg_8goldenskullsofhollyroger.png"
+                                                        src="/web/nato888/storage/1012/smg_8goldenskullsofhollyroger.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1013/smg_9blazingdiamonds.png"
+                                                        src="/web/nato888/storage/1013/smg_9blazingdiamonds.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1014/smg_9blazingdiamondswowpot.png"
+                                                        src="/web/nato888/storage/1014/smg_9blazingdiamondswowpot.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1015/smg_9masksoffire.png"
+                                                        src="/web/nato888/storage/1015/smg_9masksoffire.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1016/smg_9masksoffirehyperspins.png"
+                                                        src="/web/nato888/storage/1016/smg_9masksoffirehyperspins.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1017/smg_9potsofgold.png"
+                                                        src="/web/nato888/storage/1017/smg_9potsofgold.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1018/smg_15tridents.png"
+                                                        src="/web/nato888/storage/1018/smg_15tridents.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1019/smg_108heroes.png"
+                                                        src="/web/nato888/storage/1019/smg_108heroes.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="MP" data-type="SL" data-id="24"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="live22" class="tab-pane fade ">
+                                        <ul class="lists">
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1154/bingo.png"
+                                                        src="/web/nato888/storage/1154/bingo.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1155/bombing.png"
+                                                        src="/web/nato888/storage/1155/bombing.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1156/cockfighting.png"
+                                                        src="/web/nato888/storage/1156/cockfighting.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1157/cockfighting2.png"
+                                                        src="/web/nato888/storage/1157/cockfighting2.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1158/colorgame.png"
+                                                        src="/web/nato888/storage/1158/colorgame.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1159/crushingpots.png"
+                                                        src="/web/nato888/storage/1159/crushingpots.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1160/dragontiger.png"
+                                                        src="/web/nato888/storage/1160/dragontiger.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1161/forestparty.png"
+                                                        src="/web/nato888/storage/1161/forestparty.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1162/guessbasket.png"
+                                                        src="/web/nato888/storage/1162/guessbasket.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1163/instantlottery.png"
+                                                        src="/web/nato888/storage/1163/instantlottery.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="L4" data-type="SL" data-id="35"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="quickspin" class="tab-pane fade ">
+                                        <ul class="lists">
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1185/777vegas.png"
+                                                        src="/web/nato888/storage/1185/777vegas.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1186/americanburger.png"
+                                                        src="/web/nato888/storage/1186/americanburger.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1187/bonusmania.png"
+                                                        src="/web/nato888/storage/1187/bonusmania.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1188/bonusmaniadeluxe.png"
+                                                        src="/web/nato888/storage/1188/bonusmaniadeluxe.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1189/caiyuanguangjin.png"
+                                                        src="/web/nato888/storage/1189/caiyuanguangjin.png"
+                                                        lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1190/cocorico.png"
+                                                        src="/web/nato888/storage/1190/cocorico.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1191/dragonball.png"
+                                                        src="/web/nato888/storage/1191/dragonball.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1192/firehit.png"
+                                                        src="/web/nato888/storage/1192/firehit.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1193/flaming7.png"
+                                                        src="/web/nato888/storage/1193/flaming7.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li data-v-5fd1e346="">
+                                                <div data-v-5fd1e346="" class="item_box"><img data-v-5fd1e346=""
+                                                        data-src="/web/nato888/storage/1194/fortunebeauty.png"
+                                                        src="/web/nato888/storage/1194/fortunebeauty.png" lazy="loaded">
+
+                                                </div>
+                                                <div data-v-5fd1e346="" class="btns"><span data-v-5fd1e346=""
+                                                        data-code="FI" data-type="SL" data-id="36"
+                                                        class="palynow hover">
+                                                        Chơi ngay
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div data-v-5e2cd1c6="" data-v-44f03a1d="" class="home-game LIVE">
+                                <div data-v-5e2cd1c6="" class="container LIVE">
+                                    <ul data-v-5e2cd1c6="" class="items_box LIVE length5">
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame(`DG`, `DG0013`);"
+                                                style="color:#5c46b0" class="ball-item" data-code="PZ" data-type="LC"
+                                                data-id="13">
+                                                <p data-v-5e2cd1c6="">
+                                                    DG
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame(`AG`, `A00070`);"
+                                                style="color:#5c46b0" class="ball-item" data-code="AG" data-type="LC"
+                                                data-id="12">
+                                                <p data-v-5e2cd1c6="">
+                                                    AG
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame(`SEX`, `SEX001`);"
+                                                style="color:#5c46b0" class="ball-item" data-code="S2" data-type="LC"
+                                                data-id="11">
+                                                <p data-v-5e2cd1c6="">
+                                                    SEX
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame(`WM`, `WM0001`);"
+                                                style="color:#5c46b0" class="ball-item" data-code="DG" data-type="LC"
+                                                data-id="14">
+                                                <p data-v-5e2cd1c6="">
+                                                    WM
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-v-5e2cd1c6="">
+                                            <a data-v-5e2cd1c6="" href="javascript:launchgame(`EG`, `EG0001`);"
+                                                style="color:#5c46b0" class="ball-item" data-code="GE" data-type="LC"
+                                                data-id="15">
+                                                <p data-v-5e2cd1c6="">
+                                                    EVO
+                                                </p>
+                                                <div data-v-5e2cd1c6="" class="forward"><img data-v-5e2cd1c6=""
+                                                        src="/web/nato888/gi8_assets/images/aggle.png" alt="">
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div data-v-5e2cd1c6="" class="type_name">
+                                    <div data-v-5e2cd1c6="" class="desc LIVE">
+                                        <p data-v-5e2cd1c6="">Casino Trực Tuyến</p>
+                                        <a data-v-5e2cd1c6="" href="javascript:;" style="color:#fff"
+                                            class="choose"><span data-v-5e2cd1c6="" class="icon"></span> <span
+                                                data-v-5e2cd1c6="">Chọn menu</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!---->
+                <!---->
+            </div>
+        </div>
+
+
+        <div id="modals-container"></div>
+        
+        
+
+        
+    </div>
+    <script type="text/javascript" src="/web/nato888/gi8_assets/js/vendor.js"></script>
+    <script src="/web/nato888/gi8_assets/js/main.js?i=3273448328"></script>
+
+    <script>
+        var swiperBanner = new Swiper(".mySwiperBanner", {
+            effect: 'coverflow',
+            grabCursor: true,
+            loopFillGroupWithBlank: false,
+            centeredSlides: true,
+            centeredSlidesBounds: true,
+            centeredSlides: true,
+            initialSlide: 1,
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+                reverseDirection: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            on: {
+                slideChange: function () {
+                    $(".banner_notice").show();
+                },
+            },
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".fa-eye").click(function () {
+                $(this).toggleClass("active")
+                var show = $(this).prev("input").attr("type");
+                if (show === "password") {
+                    $(this).prev("input").attr("type", "text");
+                } else {
+                    $(this).prev("input").attr("type", "password");
+                }
+            })
+            $(".close-btn").click(function () {
+                $(".setting-wrap").removeClass("show");
+                $(".reward-wrap").removeClass("show");
+            });
+            $(".info-wrap .setting-item ").click(function () {
+                $(".setting-wrap").addClass("show");
+            });
+            $(".info-wrap .account-item").click(function () {
+                $(".setting-wrap").addClass("show");
+            });
+            $(".check-reward").click(function () {
+                // console.log(2);
+                $(".reward-wrap").addClass("show");
+            });
+            $(".close-reward").click(function () {
+
+                $(".reward-wrap").removeClass("show");
+            });
+
+            $(".box-withdraw .hideWidthdraw-1").click(function () {
+                $("#withdraw1").css('display', 'block');
+                $("#withdraw2").css('display', 'none');
+            })
+            $(".box-withdraw .hideWidthdraw-2").click(function () {
+                $("#withdraw2").css('display', 'block');
+                $("#withdraw1").css('display', 'none');
+            })
+            $(".deposit-content li.bank-item label").click(function () {
+                // console.log(1);
+                $(".deposit-content li.bank-item label").removeClass("active");
+                $(this).addClass("active");
+            });
+            $(".deposit-content .box .wrap-cash .cash").click(function () {
+                // console.log(1);
+                $(".deposit-content .box .wrap-cash .cash").removeClass("active");
+                $(this).addClass("active");
+            });
+            $(".close-profile").click(function () {
+                $(".profile-user").addClass("hide");
+            });
+            $(".logined_item.nickname").click(function () {
+                $(".profile-user").removeClass("hide");
+            });
+        });
+
+    </script>
+
+    <%- include('includes/footer') %>

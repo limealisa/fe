@@ -1,0 +1,198 @@
+<%- include('../../includes/header') %>
+
+    <style>
+        #change-promotion .content img {
+            max-width: 100% !important;
+            object-fit: contain;
+        }
+    </style>
+
+    <div id="body-web-promotion">
+        <div class="marquee-block">
+            <marquee class="visible-area">
+                <%=dataPage.session.siteConfig.site_brand_marquee;%>
+            </marquee>
+            <div class="icon-title">
+                <i class="fa-solid fa-volume-high"></i>
+            </div>
+        </div>
+        <div class="main-wrap">
+            <div class="tab-content" style="margin-top: 40px;">
+                <div id="home" class="tab-pane fade in active show">
+                    <div class="promo-container">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="promo-popup active" id="change-promotion">
+            <style>
+                .container-popup a {
+                    color: #007bff !important;
+                    text-decoration: underline;
+                }
+            </style>
+            <div class="container-popup" style="width:100%">
+                <div class="head">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="body">
+                    <div class="left">
+                        <div class="top">
+                            <img src="" id="thumbnail-popup-promotion">
+                            <h3 class="text-uppercase" id="title-popup-promotion"></h3>
+                        </div>
+                        <div class="bot">
+                            <button id="btn-register-promotion" type="button" class="btn btn-primary"
+                                style="width: 100%; border: none; outline: none; height: 45px; color: #fff; background-color: #403e0b; font-size: 18px;">
+                                Đăng ký tham gia
+                            </button>
+                        </div>
+                        <div class="toggle-icon">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+
+                    </div>
+                    <div class="right">
+                        <div class="content" id="content-popup-promotion"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(() => {
+            getPromotionData();
+        });
+
+
+        const getPromotionData = () => {
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/promotion",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }).done(function (response) {
+                if (response.status) {
+                    response.data.forEach(promotion => {
+                        $(".promo-container").append(`
+                            <div class="promo-item" onclick="getPromotionInfo('${promotion.id}')">
+                                <img class="zoom-effect lazyloaded" data-src="${promotion.thumbnail}" alt="${promotion.title}"
+                                    src="${promotion.thumbnail}">
+                            </div>
+                        `);
+                    });
+                } else {
+                    alert(response.msg);
+                }
+            });
+        }
+
+        const getPromotionInfo = (id) => {
+            $.ajax({
+                url: `<%=dataPage.config.MAIN_API%>/api/promotion/promotion-info/${id}`,
+                headers: {},
+                type: "GET",
+                dataType: "json",
+                success: (result) => {
+                    if (result.status) {
+                        checkPromotionRegister(id);
+
+                        $('#content-popup-promotion').html(result.data.content);
+                        $('#title-popup-promotion').html(result.data.title);
+                        $('#thumbnail-popup-promotion').attr("src", result.data.thumbnail);
+                        //$("#btn-register-promotion").attr("onclick", `registerPromotion('${result.data.id}', "register")`);
+
+                        $(".head .fa-xmark").click(function () {
+                            $(".promo-popup").addClass("active");
+                        });
+                        $(".promo-item").click(function () {
+                            $(".promo-popup").removeClass("active");
+                        });
+                        $(".left .toggle-icon").click(function () {
+                            $(".left").toggleClass("active");
+                            $(".left h3").toggleClass("active");
+                            $(this).children().toggleClass("active");
+                        });
+                    } else {
+                        alert(result.msg);
+                    }
+                },
+            });
+        }
+
+        const checkPromotionRegister = (id) => {
+            $.ajax({
+                url: `<%=dataPage.config.MAIN_API%>/api/promotion/promotion-check-register/${id}`,
+                type: "GET",
+                headers: {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+                success: (result) => {
+                    console.log(result);
+                    if (result.status) {
+                        // true là đã đăng ký
+                        $("#btn-register-promotion").attr("onclick", `registerPromotion('${result.promotion}', "cancel")`);
+                        $("#btn-register-promotion").html(`Hủy đăng ký`);
+                    } else {
+                        //alert(result.msg);
+                        $("#btn-register-promotion").attr("onclick", `registerPromotion('${result.promotion}', "register")`);
+                        $("#btn-register-promotion").html(`Đăng ký tham gia`);
+                    }
+                },
+            });
+        }
+
+        const registerPromotion = (id, type) => {
+            if (!isLogin) return Swal.fire({
+                icon: 'error',
+                title: 'Thất bại!',
+                text: 'Vui lòng đăng nhập trước!',
+                showCancelButton: false,
+                confirmButtonText: 'Đóng'
+            });
+
+            $.ajax({
+                "url": "<%=dataPage.config.MAIN_API%>/api/promotion/promotion-register/" + id,
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <%=dataPage.session.accessToken%>",
+                    "Content-Type": "application/json",
+                },
+                "data": JSON.stringify({
+                    "type": type
+                }),
+            }).done(function (response) {
+                checkPromotionRegister(id);
+                if (response.status) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Yêu cầu thành công!',
+                        showCancelButton: false,
+                        confirmButtonText: 'Đóng'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: response.msg,
+                        showCancelButton: false,
+                        confirmButtonText: 'Đóng'
+                    });
+                }
+            });
+
+        }
+    </script>
+
+    <%- include('../../includes/footer') %>

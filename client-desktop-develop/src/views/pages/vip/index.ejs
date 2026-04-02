@@ -1,0 +1,406 @@
+<%- include('../../includes/header') %>
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <style>
+        #body-web-vip {
+            /* margin-top: 50px;
+            margin-bottom: 50px; */
+             padding-bottom: 0px;
+        }
+
+        .main-wrap {
+            max-width: 62%;
+            margin: 0 auto;
+        }
+
+        .vip-bg {
+            outline: none;
+            font-family: system-ui;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        .vip-bg img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        #body-web-vip .main-wrap .vip-box {
+            background-image: linear-gradient(0deg, #ededed 100%, #f2f2f2 0);
+            padding: 0 25px;
+            width: 1200px;
+            padding-bottom: 35px;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-rules h5 {
+            color: #454545;
+            font-size: 20px;
+            font-stretch: normal;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: normal;
+            line-height: 4.5;
+            text-align: center;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-privilege>h5 {
+            color: #454545;
+            font-size: 20px;
+            font-stretch: normal;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: normal;
+            line-height: normal;
+            line-height: 4.5;
+            text-align: center;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-rules h2 {
+            color: rgb(37, 168, 222);
+            text-align: center;
+            font-size: 30px;
+            line-height: 1.5;
+            margin: 15px auto;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-rules p {
+            font-size: 24px;
+            margin: 14px auto;
+            line-height: 1.5;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-rules p span {
+            color: red;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-privilege table {
+            width: 100%;
+            text-align: center;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-privilege table {
+            width: 100%;
+            text-align: center;
+        }
+
+        table,
+        td,
+        tr,
+        th {
+            border: none;
+            text-align: center;
+            color: #818181 !important;
+        }
+
+        table,
+        td,
+        tr,
+        th {
+            border: none;
+            text-align: center;
+            color: #818181 !important;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-privilege table td {
+            height: 40px;
+            border: 1px solid transparent;
+            background: #fff;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        #body-web-vip .main-wrap .vip-box .vip-privilege table th {
+            height: 52px;
+            border: 1px solid transparent;
+            background: #fff;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .swiper {
+            width: 650px;
+            height: 311px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .vip-card {
+            width: 650px;
+            height: 311px;
+        }
+
+        .vip-level-0 {
+            background-image: url("/web/images/vip/card/vip0.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-1 {
+            background-image: url("/web/images/vip/card/vip1.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-2 {
+            background-image: url("/web/images/vip/card/vip2.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-3 {
+            background-image: url("/web/images/vip/card/vip3.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-4 {
+            background-image: url("/web/images/vip/card/vip4.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-5 {
+            background-image: url("/web/images/vip/card/vip5.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-6 {
+            background-image: url("/web/images/vip/card/vip6.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-7 {
+            background-image: url("/web/images/vip/card/vip7.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-7 {
+            background-image: url("/web/images/vip/card/vip7.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-8 {
+            background-image: url("/web/images/vip/card/vip8.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-9 {
+            background-image: url("/web/images/vip/card/vip9.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .vip-level-10 {
+            background-image: url("/web/images/vip/card/vip10.png") !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .level-txt {
+            position: absolute;
+            top: 85px;
+            left: 65px;
+            width: 74%;
+            color: #fff;
+            font-weight: bold;
+            font-size: 74px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+
+        .swiper-button-next {
+            right: -85px;
+        }
+
+        .swiper-button-prev {
+            left: -75px;
+        }
+    </style>
+
+    <div id="body-web-vip">
+        <div class="main-wrap">
+            <!-- <div class="vip-bg">
+                <img class=" lazyloaded" data-src="https://i.imgur.com/GDASj10.png" alt=""
+                    src="https://i.imgur.com/GDASj10.png">
+            </div> -->
+            <div class="swiper-box">
+
+                <div class="swiper-body" style="margin-bottom: 20px;">
+
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+
+                            <% for(var i=1; i <=60; i++) { %>
+                                <div class="swiper-slide">
+                                    <div class="vip-card vip-level-<%=(i >= 10) ? 10: i;%>">
+                                        <div class="level-txt">
+                                            <h1>VIP<span>
+                                                    <%=i;%>
+                                                </span></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+
+
+                <div class="vip-box">
+                    <div class="vip-privilege">
+                        <h5>Đặc quyền VIP</h5>
+                        <table>
+                            <tbody id="vip-privilege-table">
+                                <tr>
+                                    <th>Level VIP</th>
+                                    <th>Cược hợp lệ </th>
+                                    <th>Tích luỹ nạp</th>
+                                    <th>Thưởng thăng cấp</th>
+                                    <th>Thưởng tháng</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="vip-rules">
+                        <h5>Quy tắc và thể lệ của chương trình khuyến mãi</h5>
+                        <!-- <div class="img">
+                        <img class=" lazyloaded" data-src="https://i.imgur.com/MJrPDz6.png" alt=""
+                            src="https://i.imgur.com/MJrPDz6.png" style="width: 100%; vertical-align: middle;">
+                    </div> -->
+                        <h2>Chào mừng Quý thành viên đến với CLUB VIP hệ thống!</h2>
+                        <p><span>※ Đối tượng áp dụng: </span>Tất cả Hội viên của hệ thống </p>
+                        <p><span>※ Thời gian bắt đầu: </span>Thời gian hiện tại </p>
+                        <p><span>※ Chú ý: </span>1 điểm = 1000 VND. </p>
+
+                        <p><span>※ Nội dung khuyến mãi: </span>
+                            Kể từ hôm nay, tất cả thành viên khi tham gia đặt cược tất cả sản phẩm tại NOHU, số tiền đặt
+                            cược sẽ được tích luỹ vĩnh viễn, và sẽ được hưởng quyền lợi VIP trọn đời. Khi phát sinh giao
+                            dịch nạp tiền và đạt tới tích luỹ cược hợp lệ từ 30,000 điểm trở lên, Quý khách hàng sẽ được
+                            tham gia Câu lạc bộ VIP của chúng tôi, cấp VIP càng cao phúc lợi càng cao. Hãy cùng tham
+                            khảo chi tiết bảng phía trên.</p>
+                        <p><span>※ Cách thăng cấp và nhận phần thưởng theo cấp VIP: </span>Khi đạt được tổng cược hợp lệ
+                            tích
+                            luỹ và tổng nạp tích luỹ như sau, Hệ thống tự động thăng cấp ngay khi đủ điều kiện VIP và
+                            tiến
+                            hành
+                            phát ưu đãi theo cấp bậc tương ứng.</p>
+
+
+                        <p><span>※ Ví dụ: </span> Quý thành viên khi có tổng tiền nạp là 3,000 và cược hợp lệ là 400,000
+                            điểm thì sẽ tương ứng với
+                            VIP 4,
+                            nhận được phần quà thăng cấp là 78 điểm và thưởng hàng tháng là 16 điểm.</p>
+                        <p>※ Quà thăng cấp sẽ được tiến hành phát ngay khi Quý thành viên thăng cấp. Thưởng hàng tháng
+                            sẽ
+                            được
+                            phát vào 12h00 ngày 01 hàng tháng.Tất cả khuyến mãi chỉ yêu cầu 1 vòng cược là có thể rút
+                            tiền.Khuyến mãi VIP không áp dụng cho xổ số.</p>
+                        <p><span>※ Chú ý: </span>Với mỗi cấp bậc VIP, một thành viên chỉ nhận được khuyến mãi thăng cấp
+                            1
+                            lần
+                            duy nhất cho mỗi cấp bậc.</p>
+                        <p>※ Thành viên sau khi được thăng cấp trong vòng 90 ngày kể từ ngày thăng cấp phải duy trì cược
+                            hợp
+                            lệ
+                            duy trì tương ứng như trên mới có thể giữ nguyên cấp,nếu trong vòng 90 ngày không hoàn thành
+                            cược
+                            hợp lệ duy trì sẽ bị giáng xuống 1 cấp, và cứ tương tự như vậy.</p>
+                        <p>※ Tất cả các chương trình ưu đãi của hệ thống đều được thiết kế đặc biệt dành cho người chơi.
+                            Nếu
+                            phát hiện bất kỳ nhóm hoặc cá nhân nào có hành vi gian lận để nhận tiền thưởng hệ thống có
+                            quyền
+                            đóng băng hoặc hủy bỏ tài khoản và số dư tài khoản của nhóm hoặc cá nhân đó.</p>
+                        <p>※ hệ thống có quyền giải thích cuối cùng về các sự kiện và quyền sửa đổi hoặc chấm dứt sự
+                            kiện
+                            mà
+                            không cần thông báo, áp dụng đối với tất cả các ưu đãi.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Initialize Swiper -->
+        <script>
+            getVipConfig().then((res) => {
+                if (res.status) {
+                    const vipdata = res.data;
+                    let body = "";
+                    let i = 1;
+                    for (var key of Object.keys(vipdata)) {
+                        // console.log(key + " -> " + vipdata[key]);
+                        body += `<tr>`;
+                        body += `<th>VIP ${i}</th>`;
+                        body += `<th>${numberWithCommas(vipdata[key].valid_bet_require)}</th>`;
+                        body += `<th>${numberWithCommas(vipdata[key].deposit_require)}</th>`;
+                        body += `<th>${numberWithCommas(vipdata[key].coin_reward)}</th>`;
+                        body += `<th>${numberWithCommas(vipdata[key].coin_monthly)}</th>`;
+                        body += `</tr>`;
+                        i++;
+                    }
+                    $("#vip-privilege-table").append(body);
+                }
+                var swiper = new Swiper(".mySwiper", {
+                    effect: "cards",
+                    grabCursor: true,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                });
+            });
+
+            function getVipConfig() {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: `<%=dataPage.config.MAIN_API%>/api/vip/get-vip-config`,
+                        headers: {},
+                        type: "GET",
+                        dataType: "json",
+                        success: (result) => {
+                            resolve(result);
+                        },
+                        error: (error) => {
+                            reject(error);
+                        }
+                    });
+                });
+            }
+        </script>
+
+        <%- include('../../includes/footer') %>
